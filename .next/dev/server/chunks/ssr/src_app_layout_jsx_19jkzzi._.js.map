@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/loopix_demo/src/app/layout.jsx"],"sourcesContent":["import 'aos/dist/aos.css';\nimport './globals.css';\n\nexport const metadata = {\n  title: 'SaintCons — Thiết Kế & Thi Công Toàn Diện Tại Đồng Nai',\n  description: 'SaintCons Architecture & Construction',\n};\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang=\"vi\">\n      <head>\n        <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossOrigin=\"\" />\n        <link\n          href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap\"\n          rel=\"stylesheet\"\n        />\n      </head>\n      <body>{children}</body>\n    </html>\n  );\n}\n"],"names":["metadata","title","description","RootLayout","children","lang","rel","href","crossOrigin"],"mappings":";;;;;;;;;;AAGO,MAAMA,WAAW;IACtBC,OAAO;IACPC,aAAa;AACf;AAEe,SAASC,WAAW,EAAEC,QAAQ,EAAE;IAC7C,qBACE,qOAAC;QAAKC,MAAK;;0BACT,qOAAC;;kCACC,oOAAC;wBAAKC,KAAI;wBAAaC,MAAK;;kCAC5B,oOAAC;wBAAKD,KAAI;wBAAaC,MAAK;wBAA4BC,aAAY;;kCACpE,oOAAC;wBACCD,MAAK;wBACLD,KAAI;;;;0BAGR,oOAAC;0BAAMF;;;;AAGb"}}]
-}
