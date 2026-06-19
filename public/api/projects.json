@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "image": "/hero_building.png",
+    "fallback": "/hero.png",
+    "title": "Dự án 1",
+    "delay": 0
+  },
+  {
+    "id": 2,
+    "image": "/villa_interior.png",
+    "fallback": "/project1.png",
+    "title": "Dự án 2",
+    "delay": 100
+  },
+  {
+    "id": 3,
+    "image": "/house_construction.png",
+    "fallback": "/hero.png",
+    "title": "Dự án 3",
+    "delay": 200
+  },
+  {
+    "id": 4,
+    "image": "/road_construction.png",
+    "fallback": "/project1.png",
+    "title": "Dự án 4",
+    "delay": 300
+  },
+  {
+    "id": 5,
+    "image": "/public_building.png",
+    "fallback": "/hero.png",
+    "title": "Dự án 5",
+    "delay": 400
+  },
+  {
+    "id": 6,
+    "image": "/architect_design.png",
+    "fallback": "/project1.png",
+    "title": "Dự án 6",
+    "delay": 500
+  }
+]
