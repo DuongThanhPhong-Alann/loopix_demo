@@ -2,9 +2,8 @@
 
 import Script from 'next/script';
 import { useEffect } from 'react';
-
-const moonSvg = `<svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
-const sunSvg = `<svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+import Swiper from 'swiper';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
 export default function ClientScripts() {
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function ClientScripts() {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: 'vi',
-          includedLanguages: 'vi,en,fr,zh-CN,ja,ko',
+          includedLanguages: 'vi,en',
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
         },
         'google_translate_element',
@@ -26,13 +25,16 @@ export default function ClientScripts() {
       if (!mounted) return;
 
       AOS.init({
-        duration: 1000,
+        duration: 900,
         once: true,
         offset: 30,
         easing: 'ease-out-cubic',
       });
 
       initLegacyInteractions(AOS);
+      initHeroSwiper();
+      initMultiSelects();
+      initQuoteForm();
     });
 
     return () => {
@@ -48,46 +50,40 @@ export default function ClientScripts() {
   );
 }
 
+function initHeroSwiper() {
+  const heroSwiper = document.querySelector('.hero-swiper');
+  if (!heroSwiper) return;
+
+  new Swiper(heroSwiper, {
+    modules: [Autoplay, EffectFade, Pagination],
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    loop: true,
+    speed: 900,
+    autoplay: {
+      delay: 4200,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.hero-swiper .swiper-pagination',
+      clickable: true,
+    },
+  });
+}
+
 function initLegacyInteractions(AOS) {
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const currentTheme = localStorage.getItem('theme');
-
-  if (themeToggleBtn) {
-    if (currentTheme === 'light') {
-      document.body.classList.add('light-mode');
-      themeToggleBtn.innerHTML = sunSvg;
-    } else {
-      themeToggleBtn.innerHTML = moonSvg;
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      let theme = 'dark';
-      if (document.body.classList.contains('light-mode')) {
-        theme = 'light';
-        themeToggleBtn.innerHTML = sunSvg;
-      } else {
-        themeToggleBtn.innerHTML = moonSvg;
-      }
-      localStorage.setItem('theme', theme);
-    });
-  }
-
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
+    return undefined;
   };
 
   const currentLangCookie = getCookie('googtrans');
   const activeLang = currentLangCookie ? currentLangCookie.split('/').pop() : 'vi';
 
   document.querySelectorAll('.lang-btn').forEach((btn) => {
-    if (btn.dataset.lang === activeLang) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
+    btn.classList.toggle('active', btn.dataset.lang === activeLang);
 
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
@@ -100,11 +96,7 @@ function initLegacyInteractions(AOS) {
   const header = document.getElementById('header');
   const updateHeader = () => {
     if (!header) return;
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
+    header.classList.toggle('scrolled', window.scrollY > 40);
   };
   window.addEventListener('scroll', updateHeader);
   updateHeader();
@@ -117,11 +109,14 @@ function initLegacyInteractions(AOS) {
     spans[0].style.transform = 'none';
     spans[1].style.opacity = '1';
     spans[2].style.transform = 'none';
+    burger.setAttribute('aria-expanded', 'false');
   };
 
   if (burger && navLinks) {
     burger.addEventListener('click', () => {
       navLinks.classList.toggle('show');
+      burger.setAttribute('aria-expanded', String(navLinks.classList.contains('show')));
+
       const spans = burger.querySelectorAll('span');
       if (navLinks.classList.contains('show')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -133,106 +128,139 @@ function initLegacyInteractions(AOS) {
     });
   }
 
-  const sections = document.querySelectorAll('section');
+  const sections = document.querySelectorAll('main section[id]');
   const navItems = document.querySelectorAll('.nav-links a');
 
-  window.addEventListener('scroll', () => {
+  const updateActiveNav = () => {
     let current = '';
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      if (window.pageYOffset >= sectionTop - 150) {
-        current = section.getAttribute('id');
+      if (window.pageYOffset >= section.offsetTop - 150) {
+        current = section.getAttribute('id') || '';
       }
     });
 
     navItems.forEach((a) => {
-      a.classList.remove('active');
-      if (a.getAttribute('href').substring(1) === current) {
-        a.classList.add('active');
-      }
+      a.classList.toggle('active', a.getAttribute('href')?.substring(1) === current);
     });
-  });
+  };
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav();
 
   navItems.forEach((anchor) => {
     anchor.addEventListener('click', function onNavClick(e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId?.startsWith('#')) return;
       e.preventDefault();
       navLinks?.classList.remove('show');
       resetBurger();
 
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 88,
+          top: targetElement.offsetTop - 82,
           behavior: 'smooth',
         });
       }
     });
   });
 
-  window.openLightbox = function openLightbox(src) {
-    const lightbox = document.getElementById('lightbox');
-    const img = document.getElementById('lb-img');
-    if (!lightbox || !img) return;
-    lightbox.style.display = 'block';
-    img.src = src;
-  };
-
-  window.closeLightbox = function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    if (!lightbox) return;
-    lightbox.style.display = 'none';
-  };
-
-  const lightbox = document.getElementById('lightbox');
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target !== document.getElementById('lb-img')) {
-      window.closeLightbox();
-    }
-  });
-
   renderProjects(AOS);
 }
 
-async function renderProjects(AOS) {
+function renderProjects(AOS) {
   const gallery = document.getElementById('projects-gallery');
   if (!gallery) return;
 
-  try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/photos?_limit=6');
-    if (!response.ok) throw new Error('Network response was not ok');
+  const projects = [
+    { slug: 'homestay-x', tag: 'Homestay', image: '/hero_building.png', fallback: '/hero.png', title: 'Homestay X', delay: 0 },
+    { slug: 'hotel-y', tag: 'Hotel', image: '/villa_interior.png', fallback: '/project1.png', title: 'Hotel Y', delay: 100 },
+    { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/house_construction.png', fallback: '/hero.png', title: 'Love Hotel Z', delay: 200 },
+    { slug: 'resort-nam', tag: 'Resort', image: '/road_construction.png', fallback: '/project1.png', title: 'Resort Nam', delay: 300 },
+    { slug: 'coworking-a', tag: 'Co-working space', image: '/public_building.png', fallback: '/hero.png', title: 'Co-working A', delay: 400 },
+    { slug: 'apartment-b', tag: 'Apartment', image: '/architect_design.png', fallback: '/project1.png', title: 'Apartment B', delay: 500 },
+  ];
 
-    const apiData = await response.json();
-    const localProjects = [
-      { image: '/hero_building.png', fallback: '/hero.png', title: 'Dự án 1', delay: 0 },
-      { image: '/villa_interior.png', fallback: '/project1.png', title: 'Dự án 2', delay: 100 },
-      { image: '/house_construction.png', fallback: '/hero.png', title: 'Dự án 3', delay: 200 },
-      { image: '/road_construction.png', fallback: '/project1.png', title: 'Dự án 4', delay: 300 },
-      { image: '/public_building.png', fallback: '/hero.png', title: 'Dự án 5', delay: 400 },
-      { image: '/architect_design.png', fallback: '/project1.png', title: 'Dự án 6', delay: 500 },
-    ];
+  gallery.innerHTML = projects
+    .map(
+      (project) => `
+        <a class="g-item project-card" href="/projects/${project.slug}" data-aos="zoom-in" data-aos-delay="${project.delay}">
+          <img src="${project.image}" onerror="this.src='${project.fallback}'" alt="${project.title}" />
+          <div class="g-overlay project-overlay">
+            <span class="project-tag">${project.tag}</span>
+            <strong>${project.title}</strong>
+            <em>Tìm hiểu thêm</em>
+          </div>
+        </a>
+      `,
+    )
+    .join('');
 
-    const projects = apiData.map((item, index) => ({
-      ...localProjects[index],
-      apiTitle: item.title,
-    }));
+  AOS.refresh();
+}
 
-    gallery.innerHTML = projects
-      .map(
-        (p) => `
-      <div class="g-item" onclick="openLightbox('${p.image}')" data-aos="zoom-in" data-aos-delay="${p.delay}">
-        <img src="${p.image}" onerror="this.src='${p.fallback}'" alt="${p.title}" />
-        <div class="g-overlay"><span>Xem dự án</span></div>
-      </div>
-    `,
-      )
-      .join('');
+function initMultiSelects() {
+  document.querySelectorAll('.multi-select').forEach((select) => {
+    const button = select.querySelector('button');
+    const checkboxes = select.querySelectorAll('input[type="checkbox"]');
+    const defaultLabel = button?.textContent || '';
 
-    AOS.refresh();
-  } catch (error) {
-    console.error('Lỗi khi tải danh sách dự án:', error);
-    gallery.innerHTML =
-      '<p style="text-align:center; width:100%; grid-column: 1/-1;">Không thể tải danh sách dự án. Vui lòng thử lại sau.</p>';
-  }
+    button?.addEventListener('click', () => {
+      select.classList.toggle('open');
+    });
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', () => {
+        const selected = [...checkboxes].filter((item) => item.checked).map((item) => item.value);
+        if (button) button.textContent = selected.length ? `${defaultLabel} (${selected.length})` : defaultLabel;
+      });
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    document.querySelectorAll('.multi-select.open').forEach((select) => {
+      if (!select.contains(event.target)) select.classList.remove('open');
+    });
+  });
+}
+
+function initQuoteForm() {
+  const form = document.getElementById('quote-form');
+  const status = document.getElementById('quote-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    status.textContent = '';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      status.textContent = 'Vui lòng kiểm tra email và số điện thoại.';
+      return;
+    }
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+    form.querySelectorAll('.multi-select').forEach((select) => {
+      const name = select.dataset.name;
+      if (!name) return;
+      payload[name] = [...select.querySelectorAll('input:checked')].map((input) => input.value);
+    });
+
+    try {
+      status.textContent = 'Đang gửi...';
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || 'Không gửi được thông tin.');
+      form.reset();
+      document.querySelectorAll('.multi-select button').forEach((button) => {
+        button.textContent = button.textContent?.replace(/ \(\d+\)$/, '') || '';
+      });
+      status.textContent = 'Đã nhận thông tin. CRM/SMTP: bổ sung sau khi cấu hình hệ thống.';
+    } catch (error) {
+      status.textContent = error.message;
+    }
+  });
 }

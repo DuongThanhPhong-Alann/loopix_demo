@@ -3,277 +3,262 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SaintCons — Thiết Kế & Thi Công Toàn Diện Tại Đồng Nai</title>
+    <title>Loopix Virtual 360 Tour - Vietnam</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/frontend/styles/global.css" />
   </head>
   <body>
-    <!-- Header -->
     <header id="header">
       <div class="wrap nav">
-        <a href="/" class="logo">
-          <span class="serif">SaintCons.</span>
+        <a href="#hero" class="logo" aria-label="Loopix home">
+          <span class="logo-mark">L</span>
+          <span class="serif">Loopix.</span>
         </a>
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Main navigation">
           <a href="#hero" class="active">Trang chủ</a>
           <a href="#about">Giới thiệu</a>
-          <a href="#services">Dịch vụ</a>
           <a href="#projects">Dự án</a>
+          <a href="#pricing">Bảng giá</a>
+          <a href="#quote">Báo giá</a>
+          <a href="#magazine">Tạp chí</a>
           <a href="#contact">Liên hệ</a>
           <div class="lang-switch mobile-only notranslate">
-            <button class="lang-btn active" data-lang="vi">VIE</button>
-            <button class="lang-btn" data-lang="en">ENG</button>
+            <button class="lang-btn active" data-lang="vi">VI</button>
+            <button class="lang-btn" data-lang="en">EN</button>
           </div>
         </nav>
         <div class="nav-r">
-          <div class="lang-switch notranslate">
-            <button class="lang-btn active" data-lang="vi">VIE</button>
-            <button class="lang-btn" data-lang="en">ENG</button>
+          <div class="lang-switch notranslate" aria-label="Language switcher">
+            <button class="lang-btn active" data-lang="vi">VI</button>
+            <button class="lang-btn" data-lang="en">EN</button>
           </div>
           <div id="google_translate_element" style="display:none;"></div>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-            <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          </button>
-          <a href="tel:0971100129" class="btn-tel">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <span class="tel-text">0971.100.129</span>
-          </a>
-          <button class="burger" id="burger">
+          <a href="#quote" class="btn-contact">Contact us</a>
+          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
             <span></span><span></span><span></span>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-bg" style="background-image: url('/hero_building.png');"></div>
-      <div class="hero-overlay"></div>
-      <div class="wrap">
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
-          <span class="eyebrow">SaintCons Architecture</span>
-          <h1>Kiến tạo <br><span class="highlight">Đẳng cấp sống</span></h1>
-          <p>Chuyên tư vấn thiết kế và thi công trọn gói tại Đồng Nai. Khẳng định vị thế qua từng công trình.</p>
-          <div class="row">
-            <a href="#contact" class="btn btn-solid">Nhận Tư Vấn Miễn Phí</a>
-            <a href="#projects" class="btn btn-line btn-champ">Khám Phá Dự Án</a>
+    <main>
+      <section class="hero hero-tour" id="hero">
+        <div class="swiper hero-swiper" aria-label="Virtual tour project showcase">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide hero-slide">
+              <img src="/hero_building.png" alt="Dự án virtual tour khách sạn" loading="eager" />
+            </div>
+            <div class="swiper-slide hero-slide">
+              <img src="/villa_interior.png" alt="Không gian nội thất virtual tour" loading="lazy" />
+            </div>
+            <div class="swiper-slide hero-slide">
+              <img src="/architect_design.png" alt="Bản phối cảnh dự án 360" loading="lazy" />
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="wrap hero-layout">
+          <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+            <span class="eyebrow">Loopix Virtual 360 Tour</span>
+            <h1>Không gian - Thời gian - Giá trị.</h1>
+            <p>Trình chiếu ảnh dự án hiện có. Bổ sung video/slide virtual tour 360 chất lượng cao khi Thái cung cấp file WebP/MP4 tối ưu.</p>
+            <div class="row">
+              <a href="#quote" class="btn btn-solid">Nhận báo giá cụ thể</a>
+              <a href="#projects" class="btn btn-line">Xem dự án</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Stats -->
-    <section class="stats">
-      <div class="wrap">
-        <div class="stat" data-aos="fade-up" data-aos-delay="0"><b>03+</b><span>Năm Phát Triển Nhảy Vọt</span></div>
-        <div class="stat" data-aos="fade-up" data-aos-delay="100"><b>100+</b><span>Dự Án Lớn Nhỏ Đồng Nai</span></div>
-        <div class="stat" data-aos="fade-up" data-aos-delay="200"><b>100%</b><span>Đảm Bảo Chất Lượng & Tiến Độ</span></div>
-        <div class="stat" data-aos="fade-up" data-aos-delay="300"><b>24/7</b><span>Hỗ Trợ & Tư Vấn Tận Tâm</span></div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-      <div class="wrap">
-        <div class="about-grid">
+      <section class="about" id="about">
+        <div class="wrap about-grid about-copy-grid">
           <div class="about-text" data-aos="fade-right">
-            <span class="eyebrow">Về SaintCons</span>
-            <h2>Kiến tạo giá trị vững bền <br>cho vùng đất Đồng Nai</h2>
-            <p><strong>Công ty TNHH Kiến Trúc & Xây Dựng SaintCons</strong> (MST: 3603887179) có trụ sở tại Tổ 5, khu phố Hiệp Tâm 1, Thị trấn Định Quán, Huyện Định Quán, Tỉnh Đồng Nai. Dù mới chính thức thành lập năm 2022, nhưng đội ngũ kỹ sư và thợ lành nghề của chúng tôi đã gắn bó nhiều năm với các công trình địa phương.</p>
-            <p>Với triết lý <em>"Chất lượng thực - Giá trị thực"</em>, chúng tôi cam kết mang lại sự minh bạch tuyệt đối trong báo giá, vật tư chính hãng, và tiến độ được kiểm soát gắt gao. Mỗi công trình dù lớn hay nhỏ đều là tâm huyết của toàn bộ tập thể SaintCons.</p>
-            <ul class="about-list">
-              <li data-aos="fade-up" data-aos-delay="100">Đội ngũ kỹ sư chuyên môn cao</li>
-              <li data-aos="fade-up" data-aos-delay="200">Quy trình thi công an toàn, bài bản</li>
-              <li data-aos="fade-up" data-aos-delay="300">Hỗ trợ xin giấy phép xây dựng</li>
-            </ul>
+            <span class="eyebrow">About us</span>
+            <h2>Thiết kế độc bản dựa trên không gian của bạn</h2>
+            <p>Không rập khuôn, không đại trà. Giải pháp Virtual Tour 360 của chúng tôi mang đến trải nghiệm tương tác không gian hoàn mỹ, được thiết kế độc bản dựa trên chính tọa độ và kiến trúc riêng biệt của bạn.</p>
+            <p>Tại đây, chúng tôi tin rằng mỗi công trình đều sở hữu một linh hồn riêng. Bản sắc đó không thể được truyền tải trọn vẹn qua những bức ảnh phẳng hay những thước phim cắt ghép thông thường.</p>
+            <p class="pending-note">Bổ sung hình ảnh minh họa khi có file cập nhật sáng mai.</p>
           </div>
-          <div class="about-img" data-aos="fade-left">
-            <img src="/villa_interior.png" alt="Đội ngũ thi công SaintCons" onerror="this.src='/hero.png'">
+          <div class="about-slogan" data-aos="fade-left">
+            <span>Chúng tôi lắng nghe</span>
+            <strong>Hình ảnh cất tiếng</strong>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Services Section -->
-    <section class="svc" id="services">
-      <div class="wrap">
-        <div class="sec-head" data-aos="fade-up">
-          <span class="eyebrow">Dịch vụ cốt lõi</span>
-          <h2>Giải pháp toàn diện <br>Mọi hạng mục công trình</h2>
-          <p>SaintCons đáp ứng đầy đủ năng lực thi công từ dân dụng đến công cộng và hạ tầng giao thông nội bộ.</p>
+      <section class="proj" id="projects">
+        <div class="wrap">
+          <div class="sec-head" data-aos="fade-up">
+            <span class="eyebrow">Project grid</span>
+            <h2>Không gian đã kể chuyện bằng 360</h2>
+            <p>Các khối dự án dùng ảnh đại diện lớn, tag loại không gian và link động đến trang chi tiết. Bổ sung URL thật khi có slug dự án chính thức.</p>
+          </div>
+          <div class="gallery-grid project-grid" id="projects-gallery"></div>
         </div>
+      </section>
 
-        <div class="svc-row" data-aos="fade-up">
-          <div class="im im-design">
-            <span class="tag">Thiết Kế</span>
+      <section class="pricing" id="pricing">
+        <div class="wrap">
+          <div class="sec-head" data-aos="fade-up">
+            <span class="eyebrow">Pricing</span>
+            <h2>Bảng giá theo gói</h2>
+            <p>Bảng giá hiện là bản bổ sung tạm. Sẽ cập nhật lại theo Google Sheet khi có dữ liệu cuối cùng.</p>
           </div>
-          <div class="txt">
-            <span class="num">01.</span>
-            <h2>Tư Vấn Thiết Kế Kiến Trúc</h2>
-            <p>Cung cấp bản vẽ 2D, 3D sắc nét, phối cảnh mặt tiền và thiết kế nội thất. Chúng tôi tư vấn các giải pháp không gian tối ưu gió, ánh sáng và phong thủy hợp tuổi gia chủ.</p>
+          <div class="pricing-grid" data-aos="fade-up">
+            <article class="price-card">
+              <span>Starter</span>
+              <h3>Bổ sung</h3>
+              <p>Không gian nhỏ, số điểm chụp cơ bản, bàn giao link tour.</p>
+            </article>
+            <article class="price-card standard-card">
+              <span>Standard</span>
+              <h3>Bổ sung</h3>
+              <p>Gói nổi bật cho khách sạn, homestay, staycation với điểm chụp mở rộng.</p>
+            </article>
+            <article class="price-card">
+              <span>Premium</span>
+              <h3>Bổ sung</h3>
+              <p>Tối ưu trải nghiệm thương hiệu, tích hợp media, CTA và bản đồ không gian.</p>
+            </article>
+            <article class="price-card">
+              <span>Enterprise</span>
+              <h3>Bổ sung</h3>
+              <p>Chuỗi dự án, bất động sản hoặc resort cần quy trình riêng và quản trị nhiều điểm.</p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="svc-row rev" data-aos="fade-up">
-          <div class="txt">
-            <span class="num">02.</span>
-            <h2>Thi Công Nhà Ở Dân Dụng</h2>
-            <p>Thi công trọn gói "chìa khóa trao tay" nhà cấp 4, nhà phố, biệt thự. Cam kết sử dụng vật liệu tiêu chuẩn, giám sát thi công chặt chẽ, bảo hành kết cấu dài hạn.</p>
+      <section class="quote" id="quote">
+        <div class="wrap quote-grid">
+          <div class="quote-copy" data-aos="fade-right">
+            <span class="eyebrow">Smart quote</span>
+            <h2>Hãy để chúng tôi kết nối bạn</h2>
+            <p>Form gửi bằng Ajax, có validate email và số điện thoại. SMTP/CRM tự động: bổ sung sau khi có thông tin máy chủ mail hoặc endpoint CRM.</p>
           </div>
-          <div class="im im-house">
-            <span class="tag">Dân Dụng</span>
-          </div>
-        </div>
+          <form class="quote-form" id="quote-form" data-aos="fade-left" novalidate>
+            <div class="fld"><input name="fullName" type="text" placeholder="Họ Tên" required /></div>
+            <div class="fld"><input name="email" type="email" placeholder="Email" required /></div>
+            <div class="fld"><input name="phone" type="tel" placeholder="SĐT" pattern="^(0|\\+84)[0-9]{8,10}$" required /></div>
 
-        <div class="svc-row" data-aos="fade-up">
-          <div class="im im-road">
-            <span class="tag">Hạ Tầng</span>
-          </div>
-          <div class="txt">
-            <span class="num">03.</span>
-            <h2>Thi Công Đường Bê Tông</h2>
-            <p>Thực hiện các tuyến đường bê tông liên thôn, liên xã, đường nội bộ khu dân cư, đảm bảo kỹ thuật đầm nén, mác bê tông chuẩn chịu tải trọng tốt.</p>
-          </div>
-        </div>
-
-        <div class="svc-row rev" data-aos="fade-up">
-          <div class="txt">
-            <span class="num">04.</span>
-            <h2>Công Trình Công Cộng</h2>
-            <p>Đảm nhận thi công các hạng mục công cộng như nhà văn hóa, công viên tiểu cảnh, tường rào, hệ thống thoát nước, góp phần phát triển cảnh quan địa phương.</p>
-          </div>
-          <div class="im im-public">
-            <span class="tag">Công Cộng</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Gallery Section -->
-    <section class="proj" id="projects">
-      <div class="wrap">
-        <div class="sec-head" data-aos="fade-up">
-          <span class="eyebrow">Thư viện ảnh thực tế</span>
-          <h2>Các Dự Án Nổi Bật</h2>
-          <p>Những công trình thực tế đã được SaintCons thiết kế và thi công. (Bấm vào ảnh để xem chi tiết)</p>
-        </div>
-        
-        <div class="gallery-grid" id="projects-gallery">
-          <!-- Projects will be fetched and rendered dynamically via src/frontend/legacy/main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-      <div class="wrap">
-        <div class="sec-head" style="margin-bottom: 40px;" data-aos="fade-up">
-          <span class="eyebrow">Liên hệ ngay</span>
-          <h2>Bắt đầu dự án của bạn cùng SaintCons</h2>
-        </div>
-        <div class="contact-grid">
-          <div class="c-info" data-aos="fade-right">
-            <div class="il">
-              <div>
-                <b>Trụ sở chính</b>
-                <span>Tổ 5, khu phố Hiệp Tâm 1, Thị trấn Định Quán, Huyện Định Quán, Tỉnh Đồng Nai</span>
+            <div class="multi-select" data-name="cities">
+              <button type="button">Thành phố</button>
+              <div class="multi-options">
+                <label><input type="checkbox" value="TP.HCM" /> TP.HCM</label>
+                <label><input type="checkbox" value="Hà Nội" /> Hà Nội</label>
+                <label><input type="checkbox" value="Đà Nẵng" /> Đà Nẵng</label>
+                <label><input type="checkbox" value="Đồng Nai" /> Đồng Nai</label>
               </div>
             </div>
-            <div class="il">
-              <div>
-                <b>Hotline</b>
-                <span>0971.100.129</span>
-              </div>
-            </div>
-            <div class="il">
-              <div>
-                <b>Mã số thuế</b>
-                <span>3603887179</span>
-              </div>
-            </div>
-            
-            <form class="c-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã liên hệ. SaintCons sẽ gọi lại cho bạn sớm nhất!');">
-              <h3 style="font-size:24px; margin: 40px 0 20px;">Gửi Yêu Cầu Tư Vấn</h3>
-              <div class="fld">
-                <input type="text" placeholder="Họ và tên của bạn" required />
-              </div>
-              <div class="fld">
-                <input type="tel" placeholder="Số điện thoại" required />
-              </div>
-              <div class="fld">
-                <select required>
-                  <option value="" disabled selected>Dịch vụ quan tâm</option>
-                  <option value="1">Thiết kế & Thi công Nhà dân dụng</option>
-                  <option value="2">Thi công Đường bê tông</option>
-                  <option value="3">Thi công Công trình công cộng</option>
-                  <option value="4">Khác</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-solid">Gửi Thông Tin</button>
-            </form>
-          </div>
-          
-          <div class="c-map" data-aos="fade-left">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15655.45494951152!2d107.2844833!3d11.1983057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31745db4730d12e9%3A0xc33e5ec7419e71e7!2zxJDhu4tuaCBRdcOhbiwgxJDhu5NuZyBOYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1718000000000!5m2!1svi!2s" 
-              width="100%" height="100%" style="border:0; border-radius: 8px; min-height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="wrap">
-        <div class="foot-grid" data-aos="fade-up">
-          <div class="foot-col foot-logo">
-            <a href="/" class="logo">
-              <span class="serif" style="font-size:32px;color:var(--champ)">SaintCons.</span>
+            <div class="multi-select" data-name="spaceTypes">
+              <button type="button">Phân loại không gian</button>
+              <div class="multi-options">
+                <label><input type="checkbox" value="Khách sạn" /> Khách sạn</label>
+                <label><input type="checkbox" value="Homestay" /> Homestay</label>
+                <label><input type="checkbox" value="Staycation" /> Staycation</label>
+                <label><input type="checkbox" value="Căn hộ" /> Căn hộ</label>
+                <label><input type="checkbox" value="Nhà đất" /> Nhà đất</label>
+                <label><input type="checkbox" value="Văn phòng" /> Văn phòng</label>
+              </div>
+            </div>
+
+            <div class="multi-select" data-name="areas">
+              <button type="button">Diện tích</button>
+              <div class="multi-options">
+                <label><input type="checkbox" value="Dưới 100m2" /> Dưới 100m2</label>
+                <label><input type="checkbox" value="100-300m2" /> 100-300m2</label>
+                <label><input type="checkbox" value="300-800m2" /> 300-800m2</label>
+                <label><input type="checkbox" value="Trên 800m2" /> Trên 800m2</label>
+              </div>
+            </div>
+
+            <div class="multi-select" data-name="rooms">
+              <button type="button">Số phòng</button>
+              <div class="multi-options">
+                <label><input type="checkbox" value="1-5" /> 1-5</label>
+                <label><input type="checkbox" value="6-15" /> 6-15</label>
+                <label><input type="checkbox" value="16-30" /> 16-30</label>
+                <label><input type="checkbox" value="Trên 30" /> Trên 30</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-solid">Nhận báo giá cụ thể</button>
+            <p class="form-status" id="quote-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="magazine" id="magazine">
+        <div class="wrap">
+          <div class="sec-head" data-aos="fade-up">
+            <span class="eyebrow">Magazine</span>
+            <h2>Du lịch - Bất động sản - Công nghệ</h2>
+            <p>Tư liệu hình ảnh và video time-lapse từ dự án. CMS quản trị nội dung: bổ sung sau khi chọn nền tảng admin.</p>
+          </div>
+          <div class="mag-grid">
+            <a class="mag-item" href="#" data-aos="fade-up">
+              <img src="/fb_auto_1.jpg" alt="Bài viết du lịch" onerror="this.src='/hero_building.png'" />
+              <span>Du lịch</span>
+              <h3>Trải nghiệm lưu trú bắt đầu từ một cú kéo chuột</h3>
             </a>
-            <p class="foot-about">Công ty TNHH Kiến Trúc & Xây Dựng SaintCons.<br>Chuyên tư vấn thiết kế, thi công đường bê tông, nhà dân dụng và công trình công cộng tại Đồng Nai.</p>
-          </div>
-          <div class="foot-col">
-            <h4>Dịch vụ</h4>
-            <a href="#services">Thiết kế Kiến trúc</a>
-            <a href="#services">Thi công Nhà ở</a>
-            <a href="#services">Hạ tầng đường bê tông</a>
-            <a href="#services">Công trình công cộng</a>
-          </div>
-          <div class="foot-col">
-            <h4>Thông tin</h4>
-            <a href="#about">Về chúng tôi</a>
-            <a href="#projects">Thư viện ảnh</a>
-            <a href="#contact">Liên hệ</a>
-          </div>
-          <div class="foot-col">
-            <h4>Kết nối</h4>
-            <a href="https://www.facebook.com/profile.php?id=100088512900754" target="_blank">Fanpage Facebook</a>
-            <a href="#">Zalo Official</a>
+            <a class="mag-item" href="#" data-aos="fade-up" data-aos-delay="100">
+              <img src="/fb_auto_2.jpg" alt="Bài viết bất động sản" onerror="this.src='/villa_interior.png'" />
+              <span>Bất động sản</span>
+              <h3>Virtual tour giúp người mua đọc không gian trước khi đến xem</h3>
+            </a>
+            <a class="mag-item" href="#" data-aos="fade-up" data-aos-delay="200">
+              <img src="/fb_auto_3.jpg" alt="Bài viết công nghệ" onerror="this.src='/architect_design.png'" />
+              <span>Công nghệ</span>
+              <h3>Time-lapse và 360 tour trong quy trình bán hàng hiện đại</h3>
+            </a>
           </div>
         </div>
-        <div class="foot-b" data-aos="fade-in" data-aos-delay="200">
-          <span>&copy; 2026 SaintCons. MST: 3603887179. All Rights Reserved.</span>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="wrap contact-grid">
+          <div class="c-info" data-aos="fade-right">
+            <span class="eyebrow">Contact</span>
+            <h2>Sense & Scene Studio</h2>
+            <div class="il"><b>Email</b><span>hello@loopix.vn</span></div>
+            <div class="il"><b>Hotline</b><span>Bổ sung</span></div>
+            <div class="il"><b>Social</b><span>Facebook / Instagram / LinkedIn</span></div>
+          </div>
+          <form class="c-form footer-lead-form" data-aos="fade-left" onsubmit="event.preventDefault(); document.getElementById('quote').scrollIntoView({behavior:'smooth'});">
+            <h3>Gửi thông tin nhanh</h3>
+            <div class="fld"><input type="text" placeholder="Họ tên" required /></div>
+            <div class="fld"><input type="tel" placeholder="SĐT" required /></div>
+            <button type="submit" class="btn btn-solid">Nhận tư vấn</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-bottom">
+        <a href="#hero" class="logo"><span class="logo-mark">L</span><span class="serif">Loopix.</span></a>
+        <div class="footer-socials">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <div class="foot-b">
+          <span>Copyright © 2026 Sense & Scene Studio. All right reserved.</span>
+          <span>Loopix Virtual 360 Tour — Vietnam</span>
         </div>
       </div>
     </footer>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-      <span class="lb-close" onclick="closeLightbox()">&times;</span>
-      <img class="lb-content" id="lb-img">
-    </div>
-
-    <!-- Google Translate Script -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'vi', includedLanguages: 'vi,en,fr,zh-CN,ja,ko', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'vi', includedLanguages: 'vi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
       }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <script type="module" src="/src/frontend/legacy/main.js"></script>
   </body>
 </html>
