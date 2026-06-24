@@ -127,7 +127,7 @@ export default function PricingPage() {
           <div className="wrap hero-layout">
             <div className="hero-content">
               <span className="eyebrow">Pricing detail</span>
-              <h1>Bảng giá chi tiết</h1>
+              <h1><span>Bảng giá</span><span>chi tiết</span></h1>
               <p>Giá đã bao gồm VAT 10%, cập nhật theo file bảng giá tháng 6/2025.</p>
             </div>
           </div>

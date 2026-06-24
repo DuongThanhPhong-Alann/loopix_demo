@@ -182,18 +182,18 @@ function renderProjects(AOS) {
   if (!gallery) return;
 
   const projects = [
-    { slug: 'homestay-x', tag: 'Homestay', image: '/Villa_Virtual360.png', fallback: '/Real%20estate_Virtual360.jpg', title: 'Homestay X', delay: 0 },
-    { slug: 'hotel-y', tag: 'Hotel', image: '/Real%20estate_Virtual360.jpg', fallback: '/Booking_Panaroma.png', title: 'Hotel Y', delay: 100 },
-    { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/Real%20Estate_Insta360%20Camera.png', fallback: '/Villa_Virtual360.png', title: 'Love Hotel Z', delay: 200 },
-    { slug: 'resort-nam', tag: 'Resort', image: '/Booking_Panaroma.png', fallback: '/Villa_Virtual360.png', title: 'Resort Nam', delay: 300 },
-    { slug: 'coworking-a', tag: 'Co-working space', image: '/Coworking_Virtual360.jpg', fallback: '/Coworking%20Space_Virtual360.webp', title: 'Co-working A', delay: 400 },
-    { slug: 'apartment-b', tag: 'Apartment', image: '/Real%20Estate_Insta360%20Camera.png', fallback: '/Real%20estate_Virtual360.jpg', title: 'Apartment B', delay: 500 },
+    { slug: 'homestay-x', tag: 'Homestay', image: '/Virtual360%20Tour.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Homestay X', delay: 0 },
+    { slug: 'hotel-y', tag: 'Hotel', image: '/Insta360%20Camera_Travel.jpeg', fallback: '/Coworking_Virtual360.jpg', title: 'Hotel Y', delay: 100 },
+    { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/Insta360%20Camera.jpg', fallback: '/Insta360%20camera(1).jpg', title: 'Love Hotel Z', delay: 200 },
+    { slug: 'resort-nam', tag: 'Resort', image: '/Coworking_Virtual360.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Resort Nam', delay: 300 },
+    { slug: 'coworking-a', tag: 'Co-working space', image: '/Coworking_Virtual360.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Co-working A', delay: 400 },
+    { slug: 'apartment-b', tag: 'Apartment', image: '/Insta360%20camera(1).jpg', fallback: '/Virtual360%20Tour.jpg', title: 'Apartment B', delay: 500 },
   ];
 
   gallery.innerHTML = projects
     .map(
       (project) => `
-        <a class="g-item project-card" href="/projects/${project.slug}" data-aos="zoom-in" data-aos-delay="${project.delay}">
+        <a class="g-item project-card" href="/projects/${project.slug}">
           <img src="${project.image}" onerror="this.src='${project.fallback}'" alt="${project.title}" loading="lazy" decoding="async" />
           <div class="g-overlay project-overlay">
             <span class="project-tag">${project.tag}</span>

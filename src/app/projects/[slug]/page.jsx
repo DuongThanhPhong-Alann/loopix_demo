@@ -1,10 +1,10 @@
 const projects = {
-  'homestay-x': { title: 'Homestay X', tag: 'Homestay', image: '/loopix%20homestay.png' },
-  'hotel-y': { title: 'Hotel Y', tag: 'Hotel', image: '/loopix%20hotel.png' },
-  'love-hotel-z': { title: 'Love Hotel Z', tag: 'Love Hotel', image: '/loopix%20love%20hotel.png' },
-  'resort-nam': { title: 'Resort Nam', tag: 'Resort', image: '/loopix%20resort.png' },
-  'coworking-a': { title: 'Co-working A', tag: 'Co-working space', image: '/loopix%20co-working.png' },
-  'apartment-b': { title: 'Apartment B', tag: 'Apartment', image: '/loopix%20apartment.png' },
+  'homestay-x': { title: 'Homestay X', tag: 'Homestay', image: '/Virtual360%20Tour.jpg' },
+  'hotel-y': { title: 'Hotel Y', tag: 'Hotel', image: '/Insta360%20Camera_Travel.jpeg' },
+  'love-hotel-z': { title: 'Love Hotel Z', tag: 'Love Hotel', image: '/Insta360%20Camera.jpg' },
+  'resort-nam': { title: 'Resort Nam', tag: 'Resort', image: '/Coworking_Virtual360.jpg' },
+  'coworking-a': { title: 'Co-working A', tag: 'Co-working space', image: '/Coworking_Virtual360.jpg' },
+  'apartment-b': { title: 'Apartment B', tag: 'Apartment', image: '/Insta360%20camera(1).jpg' },
 };
 
 export function generateStaticParams() {
@@ -16,7 +16,7 @@ export default async function ProjectDetail({ params }) {
   const project = projects[slug] || {
     title: 'Dự án',
     tag: 'Virtual Tour 360',
-    image: '/loopix%20hotel.png',
+    image: '/Virtual360%20Tour.jpg',
   };
 
   return (
