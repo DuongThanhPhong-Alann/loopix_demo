@@ -110,15 +110,20 @@ function initLegacyInteractions(AOS) {
     spans[1].style.opacity = '1';
     spans[2].style.transform = 'none';
     burger.setAttribute('aria-expanded', 'false');
+    burger.classList.remove('is-active');
+    navLinks?.classList.remove('is-active');
+    document.body.classList.remove('menu-open');
   };
 
   if (burger && navLinks) {
     burger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      burger.setAttribute('aria-expanded', String(navLinks.classList.contains('show')));
+      navLinks.classList.toggle('is-active');
+      burger.classList.toggle('is-active');
+      document.body.classList.toggle('menu-open', navLinks.classList.contains('is-active'));
+      burger.setAttribute('aria-expanded', String(navLinks.classList.contains('is-active')));
 
       const spans = burger.querySelectorAll('span');
-      if (navLinks.classList.contains('show')) {
+      if (navLinks.classList.contains('is-active')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
         spans[1].style.opacity = '0';
         spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
@@ -128,22 +133,27 @@ function initLegacyInteractions(AOS) {
     });
   }
 
-  const sections = document.querySelectorAll('main section[id]');
-  const navItems = document.querySelectorAll('.nav-links a');
+  const sections = [...document.querySelectorAll('main section[id]')];
+  const navItems = [...document.querySelectorAll('.nav-links a')];
 
   const updateActiveNav = () => {
     let current = '';
+    const marker = window.scrollY + Math.min(window.innerHeight * 0.4, 320);
+
     sections.forEach((section) => {
-      if (window.pageYOffset >= section.offsetTop - 150) {
-        current = section.getAttribute('id') || '';
+      if (marker >= section.offsetTop) {
+        current = section.id || '';
       }
     });
 
     navItems.forEach((a) => {
-      a.classList.toggle('active', a.getAttribute('href')?.substring(1) === current);
+      const href = a.getAttribute('href') || '';
+      const hash = href.includes('#') ? href.split('#').pop() : '';
+      a.classList.toggle('active', Boolean(hash && hash === current));
     });
   };
-  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  window.addEventListener('resize', updateActiveNav);
   updateActiveNav();
 
   navItems.forEach((anchor) => {
@@ -151,7 +161,7 @@ function initLegacyInteractions(AOS) {
       const targetId = this.getAttribute('href');
       if (!targetId?.startsWith('#')) return;
       e.preventDefault();
-      navLinks?.classList.remove('show');
+      navItems.forEach((item) => item.classList.toggle('active', item === this));
       resetBurger();
 
       const targetElement = document.querySelector(targetId);
@@ -184,7 +194,7 @@ function renderProjects(AOS) {
     .map(
       (project) => `
         <a class="g-item project-card" href="/projects/${project.slug}" data-aos="zoom-in" data-aos-delay="${project.delay}">
-          <img src="${project.image}" onerror="this.src='${project.fallback}'" alt="${project.title}" />
+          <img src="${project.image}" onerror="this.src='${project.fallback}'" alt="${project.title}" loading="lazy" decoding="async" />
           <div class="g-overlay project-overlay">
             <span class="project-tag">${project.tag}</span>
             <strong>${project.title}</strong>
