@@ -182,12 +182,12 @@ function renderProjects(AOS) {
   if (!gallery) return;
 
   const projects = [
-    { slug: 'homestay-x', tag: 'Homestay', image: '/loopix%20homestay.png', fallback: '/loopix%20hotel.png', title: 'Homestay X', delay: 0 },
-    { slug: 'hotel-y', tag: 'Hotel', image: '/loopix%20hotel.png', fallback: '/loopix%20resort.png', title: 'Hotel Y', delay: 100 },
-    { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/loopix%20love%20hotel.png', fallback: '/loopix%20hotel.png', title: 'Love Hotel Z', delay: 200 },
-    { slug: 'resort-nam', tag: 'Resort', image: '/loopix%20resort.png', fallback: '/loopix%20hotel.png', title: 'Resort Nam', delay: 300 },
-    { slug: 'coworking-a', tag: 'Co-working space', image: '/loopix%20co-working.png', fallback: '/loopix%20apartment.png', title: 'Co-working A', delay: 400 },
-    { slug: 'apartment-b', tag: 'Apartment', image: '/loopix%20apartment.png', fallback: '/loopix%20hotel.png', title: 'Apartment B', delay: 500 },
+    { slug: 'homestay-x', tag: 'Homestay', image: '/Villa_Virtual360.png', fallback: '/Real%20estate_Virtual360.jpg', title: 'Homestay X', delay: 0 },
+    { slug: 'hotel-y', tag: 'Hotel', image: '/Real%20estate_Virtual360.jpg', fallback: '/Booking_Panaroma.png', title: 'Hotel Y', delay: 100 },
+    { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/Real%20Estate_Insta360%20Camera.png', fallback: '/Villa_Virtual360.png', title: 'Love Hotel Z', delay: 200 },
+    { slug: 'resort-nam', tag: 'Resort', image: '/Booking_Panaroma.png', fallback: '/Villa_Virtual360.png', title: 'Resort Nam', delay: 300 },
+    { slug: 'coworking-a', tag: 'Co-working space', image: '/Coworking_Virtual360.jpg', fallback: '/Coworking%20Space_Virtual360.webp', title: 'Co-working A', delay: 400 },
+    { slug: 'apartment-b', tag: 'Apartment', image: '/Real%20Estate_Insta360%20Camera.png', fallback: '/Real%20estate_Virtual360.jpg', title: 'Apartment B', delay: 500 },
   ];
 
   gallery.innerHTML = projects
