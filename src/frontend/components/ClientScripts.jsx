@@ -8,6 +8,9 @@ import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 export default function ClientScripts() {
   useEffect(() => {
     let mounted = true;
+    const releaseTranslationHold = () => {
+      document.documentElement.classList.remove('translate-pending');
+    };
 
     window.googleTranslateElementInit = function googleTranslateElementInit() {
       if (!window.google?.translate?.TranslateElement) return;
@@ -19,7 +22,15 @@ export default function ClientScripts() {
         },
         'google_translate_element',
       );
+      window.setTimeout(releaseTranslationHold, 900);
     };
+
+    if (window.__loopixInitLangSwitches) {
+      window.__loopixInitLangSwitches();
+    } else {
+      initLanguageSwitches();
+    }
+    syncLanguageButtonClasses();
 
     import('aos').then(({ default: AOS }) => {
       if (!mounted) return;
@@ -37,8 +48,11 @@ export default function ClientScripts() {
       initQuoteForm();
     });
 
+    const holdTimeout = window.setTimeout(releaseTranslationHold, 2800);
+
     return () => {
       mounted = false;
+      window.clearTimeout(holdTimeout);
     };
   }, []);
 
@@ -48,6 +62,21 @@ export default function ClientScripts() {
       strategy="afterInteractive"
     />
   );
+}
+
+function getActiveLanguage() {
+  const value = `; ${document.cookie}`;
+  const parts = value.split('; googtrans=');
+  const cookie = parts.length === 2 ? parts.pop().split(';').shift() : '';
+  return cookie ? cookie.split('/').pop() : 'vi';
+}
+
+function syncLanguageButtonClasses() {
+  const activeLang = getActiveLanguage();
+  document.documentElement.dataset.activeLang = activeLang;
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.lang === activeLang);
+  });
 }
 
 function initHeroSwiper() {
@@ -71,7 +100,10 @@ function initHeroSwiper() {
   });
 }
 
-function initLegacyInteractions(AOS) {
+function initLanguageSwitches() {
+  if (document.documentElement.dataset.langSwitchReady === 'true') return;
+  document.documentElement.dataset.langSwitchReady = 'true';
+
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -81,18 +113,22 @@ function initLegacyInteractions(AOS) {
 
   const currentLangCookie = getCookie('googtrans');
   const activeLang = currentLangCookie ? currentLangCookie.split('/').pop() : 'vi';
+  document.documentElement.dataset.activeLang = activeLang;
 
   document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.lang === activeLang);
-
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
+      if (lang && lang !== 'vi') {
+        document.documentElement.classList.add('translate-pending');
+      }
       document.cookie = `googtrans=/vi/${lang}; path=/`;
       document.cookie = `googtrans=/vi/${lang}; domain=${location.hostname}; path=/`;
       window.location.reload();
     });
   });
+}
 
+function initLegacyInteractions(AOS) {
   const header = document.getElementById('header');
   const updateHeader = () => {
     if (!header) return;

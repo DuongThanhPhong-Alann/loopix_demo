@@ -9,6 +9,7 @@ function getLegacyBodyHtml() {
   const bodyHtml = bodyMatch ? bodyMatch[1] : source;
 
   return bodyHtml
+    .replace(/\r\n?/g, '\n')
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/src\/(?:assets\/styles|frontend\/styles)\/global\.css["']\s*\/?>/gi, '');
 }

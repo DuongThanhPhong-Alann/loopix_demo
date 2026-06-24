@@ -33,6 +33,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html.translate-pending body {
+  opacity: 0;
+}
+
+body {
+  transition: opacity 160ms ease;
+}
+
 body.menu-open {
   overflow: hidden;
 }
@@ -279,6 +287,16 @@ header.scrolled .nav { height: 68px; }
 
 .lang-btn.active,
 .lang-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
+  background: transparent;
+  color: var(--soft);
+}
+
+html[data-active-lang="en"] .lang-btn[data-lang="en"] {
   background: var(--bg-soft);
   color: var(--text);
 }

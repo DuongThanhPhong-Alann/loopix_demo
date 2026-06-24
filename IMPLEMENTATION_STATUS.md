@@ -83,3 +83,4 @@
 
 - Trang chi tiết mới phải có header tối giản gồm logo Loopix và nút `Trang chủ`.
 - Trang chi tiết mới phải có footer giống các trang hiện tại: logo, social links, copyright và dòng `Loopix Virtual 360 Tour — Vietnam`.
+- Trang chi tiết mới phải gắn language switch `VI/EN`, `google_translate_element` và `ClientScripts` để giữ ngôn ngữ đang chọn khi chuyển trang.

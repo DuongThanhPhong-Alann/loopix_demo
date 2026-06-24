@@ -1,3 +1,5 @@
+import ClientScripts from '../../../frontend/components/ClientScripts';
+
 const articles = {
   'du-lich-virtual-tour': {
     title: 'Trải Nghiệm Lưu Trú Bắt Đầu Từ Một Cú Kéo Chuột',
@@ -85,6 +87,11 @@ function SiteHeader() {
           <span className="logo-wordmark"><img src="/loopix-wordmark.png" alt="Loopix" /></span>
         </a>
         <div className="nav-r">
+          <div className="lang-switch notranslate" aria-label="Language switcher">
+            <button className="lang-btn active" data-lang="vi">VI</button>
+            <button className="lang-btn" data-lang="en">EN</button>
+          </div>
+          <div id="google_translate_element" style={{ display: 'none' }} />
           <a href="/" className="btn-contact">Trang chủ</a>
         </div>
       </div>
@@ -144,6 +151,7 @@ export default async function MagazineDetail({ params }) {
         </article>
       </main>
       <SiteFooter />
+      <ClientScripts />
     </>
   );
 }
