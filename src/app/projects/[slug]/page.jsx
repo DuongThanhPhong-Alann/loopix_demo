@@ -1,10 +1,10 @@
 const projects = {
-  'homestay-x': { title: 'Homestay X', tag: 'Homestay', image: '/hero_building.png' },
-  'hotel-y': { title: 'Hotel Y', tag: 'Hotel', image: '/villa_interior.png' },
-  'love-hotel-z': { title: 'Love Hotel Z', tag: 'Love Hotel', image: '/house_construction.png' },
-  'resort-nam': { title: 'Resort Nam', tag: 'Resort', image: '/road_construction.png' },
-  'coworking-a': { title: 'Co-working A', tag: 'Co-working space', image: '/public_building.png' },
-  'apartment-b': { title: 'Apartment B', tag: 'Apartment', image: '/architect_design.png' },
+  'homestay-x': { title: 'Homestay X', tag: 'Homestay', image: '/loopix%20homestay.png' },
+  'hotel-y': { title: 'Hotel Y', tag: 'Hotel', image: '/loopix%20hotel.png' },
+  'love-hotel-z': { title: 'Love Hotel Z', tag: 'Love Hotel', image: '/loopix%20love%20hotel.png' },
+  'resort-nam': { title: 'Resort Nam', tag: 'Resort', image: '/loopix%20resort.png' },
+  'coworking-a': { title: 'Co-working A', tag: 'Co-working space', image: '/loopix%20co-working.png' },
+  'apartment-b': { title: 'Apartment B', tag: 'Apartment', image: '/loopix%20apartment.png' },
 };
 
 export function generateStaticParams() {
@@ -16,7 +16,7 @@ export default async function ProjectDetail({ params }) {
   const project = projects[slug] || {
     title: 'Dự án',
     tag: 'Virtual Tour 360',
-    image: '/hero_building.png',
+    image: '/loopix%20hotel.png',
   };
 
   return (

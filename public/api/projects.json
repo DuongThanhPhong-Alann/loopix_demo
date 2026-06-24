@@ -1,44 +1,56 @@
 [
   {
     "id": 1,
-    "image": "/hero_building.png",
-    "fallback": "/hero.png",
-    "title": "Dự án 1",
+    "slug": "homestay-x",
+    "tag": "Homestay",
+    "image": "/loopix%20homestay.png",
+    "fallback": "/loopix%20hotel.png",
+    "title": "Homestay X",
     "delay": 0
   },
   {
     "id": 2,
-    "image": "/villa_interior.png",
-    "fallback": "/project1.png",
-    "title": "Dự án 2",
+    "slug": "hotel-y",
+    "tag": "Hotel",
+    "image": "/loopix%20hotel.png",
+    "fallback": "/loopix%20resort.png",
+    "title": "Hotel Y",
     "delay": 100
   },
   {
     "id": 3,
-    "image": "/house_construction.png",
-    "fallback": "/hero.png",
-    "title": "Dự án 3",
+    "slug": "love-hotel-z",
+    "tag": "Love Hotel",
+    "image": "/loopix%20love%20hotel.png",
+    "fallback": "/loopix%20hotel.png",
+    "title": "Love Hotel Z",
     "delay": 200
   },
   {
     "id": 4,
-    "image": "/road_construction.png",
-    "fallback": "/project1.png",
-    "title": "Dự án 4",
+    "slug": "resort-nam",
+    "tag": "Resort",
+    "image": "/loopix%20resort.png",
+    "fallback": "/loopix%20hotel.png",
+    "title": "Resort Nam",
     "delay": 300
   },
   {
     "id": 5,
-    "image": "/public_building.png",
-    "fallback": "/hero.png",
-    "title": "Dự án 5",
+    "slug": "coworking-a",
+    "tag": "Co-working space",
+    "image": "/loopix%20co-working.png",
+    "fallback": "/loopix%20apartment.png",
+    "title": "Co-working A",
     "delay": 400
   },
   {
     "id": 6,
-    "image": "/architect_design.png",
-    "fallback": "/project1.png",
-    "title": "Dự án 6",
+    "slug": "apartment-b",
+    "tag": "Apartment",
+    "image": "/loopix%20apartment.png",
+    "fallback": "/loopix%20hotel.png",
+    "title": "Apartment B",
     "delay": 500
   }
 ]

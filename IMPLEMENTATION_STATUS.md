@@ -5,24 +5,29 @@
 - Xong: đã tạo `public/loopix-orb.png` từ file logo chính thức, tách nền ngoài khối tròn để thay chữ `L`.
 - Xong: đã thay logo ở header/footer trang chủ và trang `/pricing`, chữ hiển thị là `Loopix` theo mẫu cung cấp.
 - Xong: đã chuyển chữ `Loopix` trong logo sang ảnh nền trong suốt `public/loopix-wordmark.png`, tách trực tiếp từ file screenshot chữ Loopix do khách cung cấp, không dựng lại bằng font.
+- Xong: toàn site dùng font `Plus Jakarta Sans`; màu chữ chính trên nền trắng là `#393232`.
+- Xong: các thành phần nhận diện vẫn giữ palette Blue Zodiac `#112D60` và Submarine `#B6C0C5`.
+- Xong: chữ thường trên nền trắng dùng `#393232`; chữ trên slider, ảnh dự án và nền brand xanh/xám dùng trắng để không chìm.
+- Xong: hero slider dùng chữ trắng trên overlay tối để không chìm vào ảnh.
+- Xong: project grid hiển thị tag và tên dự án sẵn trên ảnh; chỉ nút "Tìm hiểu thêm" hiện khi hover, không còn nền chữ.
 
 ## 1. Hero Section
 
-- Xong: hero dùng Swiper slider, có slogan lớn "Không gian - Thời gian - Giá trị"
-- Xong: slide đang dùng ảnh sẵn trong `public/`.
+- Xong: hero dùng Swiper slider, có slogan lớn 3 dòng "Không gian / Thời gian / Giá trị".
+- Xong: slide đang dùng ảnh mới theo tên trong `public/`: `loopix hotel.png`, `loopix resort.png`, `loopix homestay.png`.
 - Bổ sung: thay bằng video/ảnh virtual tour 360 chất lượng cao WebP/MP4 khi Thái cung cấp.
 
 ## 2. About Us
 
 - Xong: bên trái có nội dung sứ mệnh dịch vụ Virtual Tour 360.
 - Xong: bên phải có slogan lớn "Chúng tôi lắng nghe - Hình ảnh cất tiếng".
-- Bổ sung: ảnh minh họa mới khi có file cập nhật sáng mai.
+- Xong: đã bố cục lại About theo mẫu: bên trái là phần giới thiệu, bên phải dùng ảnh `public/nghe.jpg`; quote dùng text thật với font script để không bị vỡ nét.
 
 ## 3. Project Grid
 
 - Xong: grid dự án dùng ảnh lớn, tag loại không gian, hover phóng to `scale(1.05)` và hiện nút "Tìm hiểu thêm".
 - Xong: mỗi project card là link động dạng `/projects/{slug}` và có trang chi tiết placeholder.
-- Bổ sung: slug/URL thật và dữ liệu dự án chính thức.
+- Xong: đã cập nhật ảnh dự án theo tên mới trong `public/`: homestay, hotel, love hotel, resort, co-working, apartment.
 
 ## 4. Bảng Giá Theo Gói
 
@@ -56,6 +61,7 @@
 ## 6. Magazine Section
 
 - Xong: có 3 khối nội dung với từ khóa "Du lịch - Bất động sản - Công nghệ".
+- Xong: tiêu đề Magazine đã giảm cỡ để "Công nghệ" không bị xuống dòng trên desktop.
 - Xong: dùng hình ảnh tư liệu hiện có.
 - Bổ sung: link bài viết thật, video time-lapse thật và CMS admin sau khi chọn nền tảng quản trị.
 
@@ -64,6 +70,7 @@
 - Xong: có logo, social links, form lead nhanh.
 - Xong: copyright "Copyright © 2026 Sense & Scene Studio. All right reserved."
 - Xong: dòng phải "Loopix Virtual 360 Tour — Vietnam".
+- Xong: footer dùng nền chủ đạo của website và chữ màu xanh thương hiệu.
 - Bổ sung: hotline và link mạng xã hội thật.
 
 ## 8. Tương Tác / Animation

@@ -117,9 +117,9 @@ export default function PricingPage() {
         <section className="hero hero-tour pricing-detail-hero">
           <div className="swiper hero-swiper" aria-label="Pricing showcase">
             <div className="swiper-wrapper">
-              <div className="swiper-slide hero-slide"><img src="/hero_building.png" alt="Dự án khách sạn" loading="eager" /></div>
-              <div className="swiper-slide hero-slide"><img src="/villa_interior.png" alt="Không gian nội thất" loading="lazy" /></div>
-              <div className="swiper-slide hero-slide"><img src="/architect_design.png" alt="Thiết kế tour 360" loading="lazy" /></div>
+              <div className="swiper-slide hero-slide"><img src="/loopix%20hotel.png" alt="Dự án khách sạn" loading="eager" /></div>
+              <div className="swiper-slide hero-slide"><img src="/loopix%20resort.png" alt="Không gian resort" loading="lazy" /></div>
+              <div className="swiper-slide hero-slide"><img src="/loopix%20homestay.png" alt="Dự án homestay 360" loading="lazy" /></div>
             </div>
             <div className="swiper-pagination"></div>
           </div>
