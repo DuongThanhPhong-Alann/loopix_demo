@@ -78,3 +78,8 @@
 - Xong: cuộn trang mượt bằng `scroll-behavior: smooth` và scroll JS có `behavior: 'smooth'`.
 - Xong: ảnh ngoài hero đầu trang dùng `loading="lazy"` và ảnh render động có `decoding="async"`.
 - Xong: hamburger menu mobile bung dạng panel lớn trượt từ cạnh phải bằng class `.is-active` và `transform: translateX()`.
+
+## 9. Quy tắc trang mới
+
+- Trang chi tiết mới phải có header tối giản gồm logo Loopix và nút `Trang chủ`.
+- Trang chi tiết mới phải có footer giống các trang hiện tại: logo, social links, copyright và dòng `Loopix Virtual 360 Tour — Vietnam`.

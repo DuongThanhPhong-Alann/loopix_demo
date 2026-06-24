@@ -1240,6 +1240,77 @@ body { top: 0 !important; }
   max-width: 56ch;
 }
 
+.magazine-detail-list {
+  color: var(--soft);
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  max-width: 58ch;
+}
+
+.magazine-detail-list li {
+  display: flex;
+  gap: 10px;
+}
+
+.magazine-detail-list li::before {
+  background: var(--submarine);
+  border-radius: 50%;
+  content: '';
+  flex: 0 0 auto;
+  height: 7px;
+  margin-top: 9px;
+  width: 7px;
+}
+
+.magazine-detail-page {
+  padding-top: 94px;
+}
+
+.magazine-detail-hero {
+  min-height: calc(100vh - 94px);
+}
+
+.magazine-detail-hero img {
+  height: calc(100vh - 94px);
+}
+
+.magazine-article {
+  background: var(--paper);
+  padding: clamp(72px, 9vw, 132px) 0;
+}
+
+.magazine-article-inner {
+  max-width: 860px;
+}
+
+.magazine-author {
+  color: var(--blue-zodiac);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 34px;
+  text-transform: uppercase;
+}
+
+.magazine-article h2 {
+  color: var(--blue-zodiac);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.16;
+  margin: 52px 0 18px;
+}
+
+.magazine-article p {
+  color: var(--soft);
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+
+.magazine-article .btn {
+  margin-top: 28px;
+}
+
 .pricing-page {
   background: var(--paper);
 }
@@ -1603,6 +1674,15 @@ body :where(h1, h2, h3, h4, p, a, span, strong, em, b, li, dt, dd, label, button
   .quote-grid,
   .project-detail-hero {
     grid-template-columns: 1fr;
+  }
+  .magazine-detail-page {
+    padding-top: 76px;
+  }
+  .magazine-detail-hero {
+    min-height: auto;
+  }
+  .magazine-detail-hero img {
+    height: 48vh;
   }
   .svc-row.rev .im { order: 0; }
   .stats-grid,
