@@ -1,0 +1,14 @@
+.agents
+.github
+.husky
+.next
+node_modules
+tests
+server
+scripts
+*.log
+/footer-typography-check.png
+cloudflared.exe
+IMPLEMENTATION_STATUS.md
+UI_GUIDELINES.md
+ARCHITECTURE.md

@@ -30,7 +30,7 @@
     "id": 4,
     "slug": "resort-nam",
     "tag": "Resort",
-    "image": "/Coworking_Virtual360.jpg",
+    "image": "/Villa_Virtual360.png",
     "fallback": "/Insta360%20Camera_Travel.jpeg",
     "title": "Resort Nam",
     "delay": 300
@@ -39,8 +39,8 @@
     "id": 5,
     "slug": "coworking-a",
     "tag": "Co-working space",
-    "image": "/Coworking_Virtual360.jpg",
-    "fallback": "/Insta360%20Camera_Travel.jpeg",
+    "image": "/Coworking%20Space_Virtual360.webp",
+    "fallback": "/Coworking_Virtual360.jpg",
     "title": "Co-working A",
     "delay": 400
   },

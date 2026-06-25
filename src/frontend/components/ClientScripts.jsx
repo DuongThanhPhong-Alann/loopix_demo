@@ -221,8 +221,8 @@ function renderProjects(AOS) {
     { slug: 'homestay-x', tag: 'Homestay', image: '/Virtual360%20Tour.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Homestay X', delay: 0 },
     { slug: 'hotel-y', tag: 'Hotel', image: '/Insta360%20Camera_Travel.jpeg', fallback: '/Coworking_Virtual360.jpg', title: 'Hotel Y', delay: 100 },
     { slug: 'love-hotel-z', tag: 'Love Hotel', image: '/Insta360%20Camera.jpg', fallback: '/Insta360%20camera(1).jpg', title: 'Love Hotel Z', delay: 200 },
-    { slug: 'resort-nam', tag: 'Resort', image: '/Coworking_Virtual360.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Resort Nam', delay: 300 },
-    { slug: 'coworking-a', tag: 'Co-working space', image: '/Coworking_Virtual360.jpg', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Co-working A', delay: 400 },
+    { slug: 'resort-nam', tag: 'Resort', image: '/Villa_Virtual360.png', fallback: '/Insta360%20Camera_Travel.jpeg', title: 'Resort Nam', delay: 300 },
+    { slug: 'coworking-a', tag: 'Co-working space', image: '/Coworking%20Space_Virtual360.webp', fallback: '/Coworking_Virtual360.jpg', title: 'Co-working A', delay: 400 },
     { slug: 'apartment-b', tag: 'Apartment', image: '/Insta360%20camera(1).jpg', fallback: '/Virtual360%20Tour.jpg', title: 'Apartment B', delay: 500 },
   ];
 
