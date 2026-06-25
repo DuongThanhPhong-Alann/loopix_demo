@@ -12,6 +12,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "aos": "^2.3.4",
     "next": "^16.2.9",
     "puppeteer": "^25.1.0",

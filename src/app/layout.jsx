@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import Script from 'next/script';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 export const metadata = {
@@ -66,6 +67,7 @@ export default function RootLayout({ children }) {
           {languageBootstrap}
         </Script>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
