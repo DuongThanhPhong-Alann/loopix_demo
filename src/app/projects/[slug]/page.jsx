@@ -1,22 +1,24 @@
-const projects = {
-  'homestay-x': { title: 'Homestay X', tag: 'Homestay', image: '/Virtual360%20Tour.jpg' },
-  'hotel-y': { title: 'Hotel Y', tag: 'Hotel', image: '/Insta360%20Camera_Travel.jpeg' },
-  'love-hotel-z': { title: 'Love Hotel Z', tag: 'Love Hotel', image: '/Insta360%20Camera.jpg' },
-  'resort-nam': { title: 'Resort Nam', tag: 'Resort', image: '/Villa_Virtual360.png' },
-  'coworking-a': { title: 'Co-working A', tag: 'Co-working space', image: '/Coworking%20Space_Virtual360.webp' },
-  'apartment-b': { title: 'Apartment B', tag: 'Apartment', image: '/Insta360%20camera(1).jpg' },
-};
+import fs from 'node:fs';
+import path from 'node:path';
+import ClientScripts from '../../../frontend/components/ClientScripts';
+
+function getProjects() {
+  const filePath = path.join(process.cwd(), 'public/api/projects.json');
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
 
 export function generateStaticParams() {
-  return Object.keys(projects).map((slug) => ({ slug }));
+  return getProjects().map((project) => ({ slug: project.slug }));
 }
 
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;
-  const project = projects[slug] || {
+  const project = getProjects().find((item) => item.slug === slug) || {
     title: 'Dự án',
     tag: 'Virtual Tour 360',
     image: '/Virtual360%20Tour.jpg',
+    descriptionVi: 'Bổ sung nội dung chi tiết dự án, ảnh 360, video time-lapse và CTA khi có dữ liệu chính thức.',
+    descriptionEn: 'Detailed project content, 360 imagery, time-lapse video, and CTA will be added when official data is available.',
   };
 
   return (
@@ -26,10 +28,11 @@ export default async function ProjectDetail({ params }) {
         <div className="project-detail-copy">
           <span className="project-tag">{project.tag}</span>
           <h1>{project.title}</h1>
-          <p>Bổ sung nội dung chi tiết dự án, ảnh 360, video time-lapse và CTA khi có dữ liệu chính thức.</p>
+          <p data-vi={project.descriptionVi} data-en={project.descriptionEn}>{project.descriptionVi}</p>
           <a href="/#projects" className="btn btn-line">Quay lại dự án</a>
         </div>
       </section>
+      <ClientScripts />
     </main>
   );
 }

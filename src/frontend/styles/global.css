@@ -211,6 +211,12 @@ header.scrolled .nav { height: 68px; }
   width: 100%;
 }
 
+.logo-mark-official {
+  background: transparent;
+  height: 58px;
+  width: 58px;
+}
+
 .logo-wordmark {
   display: inline-flex;
   height: 44px;
@@ -287,18 +293,20 @@ header.scrolled .nav { height: 68px; }
 
 .lang-btn.active,
 .lang-btn:hover {
-  background: var(--bg-soft);
-  color: var(--text);
+  background: var(--blue-zodiac);
+  color: #ffffff;
 }
 
+html[data-active-lang="vi"] .lang-btn[data-lang="vi"],
+html[data-active-lang="en"] .lang-btn[data-lang="en"] {
+  background: var(--blue-zodiac);
+  color: #ffffff;
+}
+
+html[data-active-lang="vi"] .lang-btn[data-lang="en"],
 html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
   background: transparent;
   color: var(--soft);
-}
-
-html[data-active-lang="en"] .lang-btn[data-lang="en"] {
-  background: var(--bg-soft);
-  color: var(--text);
 }
 
 .btn-contact {
@@ -804,6 +812,23 @@ body { top: 0 !important; }
 .g-item:nth-child(4) { grid-column: span 4; grid-row: span 3; }
 .g-item:nth-child(5) { grid-column: span 8; grid-row: span 4; }
 .g-item:nth-child(6) { grid-column: span 4; grid-row: span 5; }
+.g-item:nth-child(7) { grid-column: span 5; grid-row: span 3; }
+.g-item:nth-child(8) { grid-column: span 7; grid-row: span 3; }
+.project-grid {
+  grid-auto-rows: clamp(82px, 7.5vw, 116px);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.project-grid .g-item {
+  min-height: 0;
+}
+.project-grid .g-item:nth-child(1) { grid-column: span 7; grid-row: span 5; }
+.project-grid .g-item:nth-child(2) { grid-column: span 5; grid-row: span 3; }
+.project-grid .g-item:nth-child(3) { grid-column: span 5; grid-row: span 2; }
+.project-grid .g-item:nth-child(4) { grid-column: span 4; grid-row: span 4; }
+.project-grid .g-item:nth-child(5) { grid-column: span 4; grid-row: span 4; }
+.project-grid .g-item:nth-child(6) { grid-column: span 4; grid-row: span 4; }
+.project-grid .g-item:nth-child(7) { grid-column: span 5; grid-row: span 3; }
+.project-grid .g-item:nth-child(8) { grid-column: span 7; grid-row: span 3; }
 .g-item img {
   backface-visibility: hidden;
   filter: none;
@@ -852,7 +877,7 @@ body { top: 0 !important; }
   align-content: end;
   align-items: end;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
   text-shadow: 0 2px 18px rgba(0,0,0,0.42);
 }
@@ -862,10 +887,10 @@ body { top: 0 !important; }
   color: #ffffff !important;
   display: block;
   font-family: var(--serif);
-  font-size: clamp(32px, 3.4vw, 52px);
+  font-size: clamp(28px, 3vw, 48px);
   font-weight: 700;
   line-height: 1.05;
-  max-width: min(100%, 12ch);
+  max-width: min(100%, 15ch);
   overflow-wrap: anywhere;
   padding: 0;
   justify-self: start;
@@ -907,6 +932,18 @@ body { top: 0 !important; }
   text-transform: uppercase;
   transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-desc {
+  color: rgba(255,255,255,0.92) !important;
+  display: -webkit-box;
+  font-size: clamp(13px, 1.08vw, 16px);
+  font-weight: 400;
+  line-height: 1.45;
+  max-width: min(100%, 48ch);
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .project-card:hover .project-overlay em {
@@ -1626,12 +1663,25 @@ body :where(h1, h2, h3, h4, p, a, span, strong, em, b, li, dt, dd, label, button
 
 .hero-tour :where(.eyebrow, h1, p),
 .hero-tour .btn-line,
-.project-overlay :where(span, strong, em),
+.project-overlay :where(span, strong, em, p),
 .btn-contact,
 .btn-solid,
 .standard-card :where(h3, p, span, li, a, strong, em),
 .pricing-table th {
   color: #ffffff !important;
+}
+
+.lang-btn.active,
+html[data-active-lang="vi"] .lang-btn[data-lang="vi"],
+html[data-active-lang="en"] .lang-btn[data-lang="en"] {
+  background: var(--blue-zodiac) !important;
+  color: #ffffff !important;
+}
+
+html[data-active-lang="vi"] .lang-btn[data-lang="en"],
+html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
+  background: transparent !important;
+  color: var(--soft) !important;
 }
 
 .hero-tour .btn-solid {
@@ -1708,6 +1758,17 @@ body :where(h1, h2, h3, h4, p, a, span, strong, em, b, li, dt, dd, label, button
   .mag-grid,
   .pricing-grid,
   .detail-plan-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-grid {
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .project-grid .g-item,
+  .project-grid .g-item:nth-child(n) {
+    aspect-ratio: 4 / 3;
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 0;
+  }
   .about-slogan {
     border-left: 0;
     border-top: 1px solid var(--line);
@@ -1737,6 +1798,7 @@ body :where(h1, h2, h3, h4, p, a, span, strong, em, b, li, dt, dd, label, button
   header.scrolled .nav { height: 62px; }
   .logo-wordmark { height: 34px; }
   .logo-mark { height: 38px; width: 38px; }
+  .logo-mark-official { height: 44px; width: 44px; }
   .btn-contact {
     min-width: auto;
     padding: 11px 14px;
@@ -1814,6 +1876,10 @@ body :where(h1, h2, h3, h4, p, a, span, strong, em, b, li, dt, dd, label, button
   }
   .project-overlay strong {
     font-size: 34px;
+  }
+  .project-desc {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
   }
   .price-card,
   .standard-card,
