@@ -121,15 +121,34 @@ function initHeroSwiper() {
 function initHeroTourSwitcher() {
   const frame = document.querySelector('.hero-tour-iframe');
   const buttons = [...document.querySelectorAll('.hero-tour-switch button[data-tour-src]')];
-  if (!frame || buttons.length === 0) return;
+  if (!frame) return;
+
+  const loadTour = (tourSrc, tourTitle) => {
+    if (!tourSrc || frame.getAttribute('src') === tourSrc) return;
+    frame.setAttribute('src', tourSrc);
+    frame.setAttribute('title', tourTitle || 'Virtual 360 tour');
+  };
+
+  const initialButton = buttons.find((button) => button.classList.contains('active')) || buttons[0];
+  const initialSrc = frame.dataset.tourSrc || initialButton?.dataset.tourSrc;
+
+  if (initialSrc) {
+    const scheduleLoad = () => loadTour(initialSrc, initialButton?.dataset.tourTitle || frame.getAttribute('title'));
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(scheduleLoad, { timeout: 1200 });
+    } else {
+      window.setTimeout(scheduleLoad, 700);
+    }
+  }
+
+  if (buttons.length === 0) return;
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       const tourSrc = button.dataset.tourSrc;
-      if (!tourSrc || frame.getAttribute('src') === tourSrc) return;
+      if (!tourSrc) return;
 
-      frame.setAttribute('src', tourSrc);
-      frame.setAttribute('title', button.dataset.tourTitle || 'Virtual 360 tour');
+      loadTour(tourSrc, button.dataset.tourTitle);
       buttons.forEach((item) => {
         const isActive = item === button;
         item.classList.toggle('active', isActive);

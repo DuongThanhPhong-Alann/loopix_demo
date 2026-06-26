@@ -37,8 +37,8 @@ function getHeroTourHtml() {
           <iframe
             class="hero-tour-iframe"
             title="The Mango Trial virtual tour"
-            src="/TheMangoTrial/out/index.html"
-            loading="eager"
+            data-tour-src="/TheMangoTrial/out/index.html"
+            loading="lazy"
             allow="accelerometer; autoplay; fullscreen; gyroscope; xr-spatial-tracking"
             allowfullscreen
           ></iframe>
