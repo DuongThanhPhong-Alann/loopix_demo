@@ -20,12 +20,14 @@ function getProjectTour(project) {
     homestay: {
       label: 'Homestay',
       title: 'The Mango Trail',
+      slug: 'the-mango-trail',
       src: '/TheMangoTrial/out/index.html',
       poster: '/loopix%20homestay.png',
     },
     hotel: {
       label: 'Hotel',
       title: 'The Odys Boutique',
+      slug: 'the-odys-boutique',
       src: '/TheOdysBoutiqueHotel/out/index.html',
       poster: '/loopix%20hotel.png',
     },
@@ -59,6 +61,7 @@ function getProjectCardHtml(project) {
                   <strong>${escapeHtml(tour.title)}</strong>
                   <p class="project-desc" data-vi="${escapeHtml(project.descriptionVi)}" data-en="${escapeHtml(project.descriptionEn)}">${escapeHtml(project.descriptionVi)}</p>
                 </div>
+                <a class="project-tour-open" href="/tours/${escapeHtml(tour.slug)}" onclick="sessionStorage.setItem('loopix-tour-autoplay','1')" aria-label="Mở ${escapeHtml(tour.title)} virtual tour"></a>
               </div>
             </article>
           `;

@@ -127,12 +127,12 @@ header.scrolled {
   align-items: center;
   display: flex;
   gap: 28px;
-  height: 94px;
+  height: 106px;
   justify-content: space-between;
   transition: height 240ms ease;
 }
 
-header.scrolled .nav { height: 68px; }
+header.scrolled .nav { height: 82px; }
 
 .pricing-header .nav {
   gap: 20px;
@@ -197,11 +197,11 @@ header.scrolled .nav { height: 68px; }
   align-items: center;
   border-radius: 50%;
   display: inline-flex;
-  height: 46px;
+  height: 92px;
   justify-content: center;
   line-height: 1;
   overflow: hidden;
-  width: 46px;
+  width: 92px;
 }
 
 .logo-mark img {
@@ -891,6 +891,13 @@ body { top: 0 !important; }
   z-index: 1;
 }
 
+.project-tour-open {
+  display: block;
+  inset: 0;
+  position: absolute;
+  z-index: 3;
+}
+
 .project-tour-fallback {
   align-items: center;
   background:
@@ -1457,6 +1464,59 @@ body { top: 0 !important; }
   max-width: 56ch;
 }
 
+.tour-detail-header .nav {
+  height: 86px;
+  justify-content: space-between;
+}
+
+.tour-detail-header .logo-mark {
+  height: 72px;
+  width: 72px;
+}
+
+.tour-detail-page {
+  background: var(--paper);
+  padding-top: 86px;
+}
+
+.tour-detail-stage {
+  background: #061124;
+  min-height: calc(100vh - 86px);
+  padding: 0;
+}
+
+.tour-detail-frame {
+  background: #061124;
+  height: calc(100dvh - 86px);
+  min-height: 620px;
+  position: relative;
+  width: 100%;
+}
+
+.tour-detail-iframe {
+  border: 0;
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .tour-detail-page {
+    padding-top: 76px;
+  }
+
+  .tour-detail-stage {
+    min-height: calc(100dvh - 76px);
+  }
+
+  .tour-detail-frame {
+    height: calc(100dvh - 76px);
+    min-height: calc(100dvh - 76px);
+  }
+}
+
 .magazine-detail-list {
   color: var(--soft);
   display: grid;
@@ -1969,10 +2029,12 @@ html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
 @media (max-width: 760px) {
   .wrap { width: min(100% - 32px, var(--maxw)); }
   section { padding: 78px 0; }
-  .nav { height: 76px; }
-  header.scrolled .nav { height: 62px; }
+  .nav { height: 86px; }
+  header.scrolled .nav { height: 76px; }
   .logo-wordmark { height: 34px; }
-  .logo-mark { height: 38px; width: 38px; }
+  .logo-mark { height: 72px; width: 72px; }
+  .tour-detail-header .nav { height: 76px; }
+  .tour-detail-header .logo-mark { height: 60px; width: 60px; }
   .logo-mark-official { height: 44px; width: 44px; }
   .btn-contact {
     min-width: auto;
