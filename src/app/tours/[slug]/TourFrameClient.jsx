@@ -179,114 +179,12 @@ export default function TourFrameClient({ src, title }) {
       style.textContent = cleanupCss;
     };
 
-    const getKrpanoObjects = (win) => {
-      const candidates = ['krpano', 'krpanoSWFObject', 'krpanoView', 'krpano1'];
-      const objects = candidates.map((name) => win[name]).filter((item) => item?.call);
-
-      Object.keys(win).forEach((key) => {
-        if (/krpano/i.test(key) && win[key]?.call && !objects.includes(win[key])) {
-          objects.push(win[key]);
-        }
-      });
-
-      return objects;
-    };
-
-    const autoStartSound = () => {
-      const doc = frame.contentDocument;
-      const win = frame.contentWindow;
-      if (!doc || !win) return;
-
-      const buttons = [...doc.querySelectorAll('button, [role="button"], .ant-btn, [class*="button"], [class*="Button"]')];
-
-      buttons
-        .filter((button) => {
-          const label = [
-            button.textContent,
-            button.getAttribute('aria-label'),
-            button.getAttribute('title'),
-            button.getAttribute('class'),
-            button.parentElement?.getAttribute('class'),
-          ].filter(Boolean).join(' ');
-
-          return /(ok|okay|start|enter|agree|allow|continue|dong y|bat dau|cho phep|confirm|modal|ModalConfirm|ant-btn-primary)/i.test(label);
-        })
-        .slice(0, 4)
-        .forEach((button) => button.click());
-
-      buttons
-        .filter((button) => {
-          const label = [
-            button.textContent,
-            button.getAttribute('aria-label'),
-            button.getAttribute('title'),
-            button.getAttribute('class'),
-            button.querySelector('i')?.getAttribute('class'),
-            button.querySelector('svg')?.getAttribute('data-icon'),
-          ].filter(Boolean).join(' ');
-
-          return /(sound|audio|music|volume|speaker|mute|unmute|fa-volume|fa-music|fa-sound)/i.test(label);
-        })
-        .slice(0, 3)
-        .forEach((button) => button.click());
-
-      doc.querySelectorAll('audio, video').forEach((media) => {
-        media.muted = false;
-        media.volume = 1;
-        media.autoplay = true;
-        media.play?.().catch(() => {});
-      });
-
-      getKrpanoObjects(win).forEach((krpano) => {
-        [
-          'resumeallsounds()',
-          'unmuteallsounds()',
-          'playsound(bgsnd)',
-          'playsound(background)',
-          'playsound(backgroundsound)',
-          'set(soundinterface.mute,false)',
-          'set(plugin[soundinterface].mute,false)',
-          'set(sound[background].mute,false)',
-          'set(sound[bgsnd].mute,false)',
-        ].forEach((command) => {
-          try {
-            krpano.call(command);
-          } catch {
-            // Ignore unsupported krpano commands in exported tours.
-          }
-        });
-      });
-    };
-
-    const runStartupAttempts = () => {
-      let attempts = 0;
-      const interval = window.setInterval(() => {
-        attempts += 1;
-        autoStartSound();
-        if (attempts >= 28) {
-          window.clearInterval(interval);
-          window.sessionStorage.removeItem('loopix-tour-autoplay');
-        }
-      }, 500);
-
-      return interval;
-    };
-
-    let startupInterval = null;
-
     const onLoad = () => {
       frame.closest('.tour-detail-frame')?.classList.add('is-loaded');
       applyCleanup();
-      autoStartSound();
       window.setTimeout(applyCleanup, 600);
-      window.setTimeout(autoStartSound, 700);
       window.setTimeout(applyCleanup, 1800);
-      window.setTimeout(autoStartSound, 1900);
       window.setTimeout(applyCleanup, 3200);
-      window.setTimeout(autoStartSound, 3300);
-
-      if (startupInterval) window.clearInterval(startupInterval);
-      startupInterval = runStartupAttempts();
     };
 
     frame.addEventListener('load', onLoad);
@@ -294,7 +192,6 @@ export default function TourFrameClient({ src, title }) {
 
     return () => {
       frame.removeEventListener('load', onLoad);
-      if (startupInterval) window.clearInterval(startupInterval);
     };
   }, []);
 
