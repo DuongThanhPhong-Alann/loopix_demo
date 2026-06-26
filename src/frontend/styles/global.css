@@ -455,10 +455,89 @@ body { top: 0 !important; }
   background: var(--brand-gradient);
 }
 
+.hero-tour-frame {
+  background: #061124;
+  height: 100%;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
+.hero-tour-iframe,
+.hero-tour-fallback {
+  border: 0;
+  display: block;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.hero-tour-iframe {
+  z-index: 1;
+}
+
+.hero-tour-fallback {
+  align-items: center;
+  background:
+    linear-gradient(120deg, rgba(3, 10, 28, 0.9), rgba(17, 45, 96, 0.66)),
+    url('/Virtual360%20Tour.jpg') center / cover;
+  color: rgba(255,255,255,0.76);
+  display: flex;
+  font-family: var(--serif);
+  font-size: clamp(54px, 9vw, 130px);
+  font-style: italic;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+}
+
+.hero-tour-switch {
+  align-items: center;
+  bottom: 34px;
+  display: inline-flex;
+  gap: 8px;
+  position: absolute;
+  right: clamp(24px, 5vw, 72px);
+  z-index: 4;
+}
+
+.hero-tour-switch button {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.34);
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  font: 700 12px/1 var(--sans);
+  min-height: 38px;
+  min-width: 74px;
+  padding: 0 16px;
+}
+
+.hero-tour-switch button.active {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--blue-zodiac);
+}
+
 .hero-tour .hero-overlay {
   background:
     linear-gradient(90deg, rgba(3, 10, 28, 0.92) 0%, rgba(17, 45, 96, 0.78) 42%, rgba(3, 10, 28, 0.34) 100%),
     linear-gradient(0deg, rgba(3, 10, 28, 0.54), rgba(3, 10, 28, 0.18));
+  pointer-events: none;
+}
+
+.hero-tour:has(.hero-tour-frame) .hero-overlay {
+  display: none;
+}
+
+.hero-tour:has(.hero-tour-frame) .hero-layout {
+  pointer-events: none;
+}
+
+.hero-tour:has(.hero-tour-frame) .hero-layout .btn {
+  pointer-events: auto;
 }
 
 .hero-tour .hero-content {
@@ -1879,6 +1958,15 @@ html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
   .hero-swiper .swiper-pagination {
     bottom: 18px !important;
     right: 24px;
+  }
+  .hero-tour-switch {
+    bottom: 18px;
+    left: 24px;
+    right: auto;
+  }
+  .hero-tour-switch button {
+    min-width: 66px;
+    padding: 0 12px;
   }
   .about-slogan span,
   .about-slogan strong {

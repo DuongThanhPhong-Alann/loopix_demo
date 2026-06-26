@@ -31,6 +31,27 @@ function getProjectsGalleryHtml() {
     .join('');
 }
 
+function getHeroTourHtml() {
+  return `
+        <div class="hero-tour-frame" aria-label="Virtual 360 project preview">
+          <iframe
+            class="hero-tour-iframe"
+            title="The Mango Trial virtual tour"
+            src="/TheMangoTrial/out/index.html"
+            loading="eager"
+            allow="accelerometer; autoplay; fullscreen; gyroscope; xr-spatial-tracking"
+            allowfullscreen
+          ></iframe>
+          <div class="hero-tour-fallback" aria-hidden="true">
+            <span>Virtual 360 Tour</span>
+          </div>
+          <div class="hero-tour-switch" role="tablist" aria-label="Choose virtual tour">
+            <button class="active" type="button" role="tab" aria-selected="true" data-tour-src="/TheMangoTrial/out/index.html" data-tour-title="The Mango Trial virtual tour">Mango</button>
+            <button type="button" role="tab" aria-selected="false" data-tour-src="/TheOdysBoutiqueHotel/out/index.html" data-tour-title="The Odys Boutique Hotel virtual tour">Odys</button>
+          </div>
+        </div>`;
+}
+
 function getLegacyBodyHtml() {
   const indexPath = path.join(process.cwd(), 'src/frontend/legacy/index.html');
   const source = fs.readFileSync(indexPath, 'utf8');
@@ -41,6 +62,7 @@ function getLegacyBodyHtml() {
     .replace(/\r\n?/g, '\n')
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/src\/(?:assets\/styles|frontend\/styles)\/global\.css["']\s*\/?>/gi, '')
+    .replace(/<div class="swiper hero-swiper"[\s\S]*?<div class="hero-overlay"><\/div>/, `${getHeroTourHtml()}\n        <div class="hero-overlay"></div>`)
     .replace(
       /(<div class="gallery-grid project-grid" id="projects-gallery">)[\s\S]*?(<\/div>\s*<\/div>\s*<\/section>)/,
       `$1${getProjectsGalleryHtml()}$2`,

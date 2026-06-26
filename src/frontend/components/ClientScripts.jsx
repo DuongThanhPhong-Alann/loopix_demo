@@ -31,6 +31,8 @@ export default function ClientScripts() {
 
       initLegacyInteractions(AOS);
       initHeroSwiper();
+      initHeroTourSwitcher();
+      initHeroTourChromeCleanup();
       initMultiSelects();
       initQuoteForm();
     });
@@ -114,6 +116,80 @@ function initHeroSwiper() {
       clickable: true,
     },
   });
+}
+
+function initHeroTourSwitcher() {
+  const frame = document.querySelector('.hero-tour-iframe');
+  const buttons = [...document.querySelectorAll('.hero-tour-switch button[data-tour-src]')];
+  if (!frame || buttons.length === 0) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const tourSrc = button.dataset.tourSrc;
+      if (!tourSrc || frame.getAttribute('src') === tourSrc) return;
+
+      frame.setAttribute('src', tourSrc);
+      frame.setAttribute('title', button.dataset.tourTitle || 'Virtual 360 tour');
+      buttons.forEach((item) => {
+        const isActive = item === button;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-selected', String(isActive));
+      });
+    });
+  });
+}
+
+function initHeroTourChromeCleanup() {
+  const frame = document.querySelector('.hero-tour-iframe');
+  if (!frame) return;
+
+  const cleanupCss = `
+    [class*="ModalConfirmWrapper"],
+    [class*="ModalConfirmWrapper"].show,
+    #themeControlbar,
+    .copyright,
+    .dropdownGroup,
+    .dropdownList,
+    .dropdownLabel,
+    .controlbar-top,
+    [class*="ControlbarWrapper"],
+    [class*="MapPanelWrapper"],
+    [class*="ActionMapWrapper"],
+    body > div:last-child[style*="z-index: -99"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    #__next,
+    [class*="TourWrapper"],
+    [id^="krpano"] {
+      height: 100% !important;
+      max-height: 100% !important;
+    }
+  `;
+
+  const applyCleanup = () => {
+    const doc = frame.contentDocument;
+    if (!doc?.head) return;
+
+    let style = doc.getElementById('loopix-tour-cleanup');
+    if (!style) {
+      style = doc.createElement('style');
+      style.id = 'loopix-tour-cleanup';
+      doc.head.appendChild(style);
+    }
+    style.textContent = cleanupCss;
+  };
+
+  frame.addEventListener('load', () => {
+    applyCleanup();
+    window.setTimeout(applyCleanup, 600);
+    window.setTimeout(applyCleanup, 1800);
+  });
+
+  applyCleanup();
 }
 
 function initLanguageSwitches() {

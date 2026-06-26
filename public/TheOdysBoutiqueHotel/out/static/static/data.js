@@ -1,0 +1,1 @@
+window.offline_id = '6a0d4f25c24fa51c7a2dce08';
