@@ -197,11 +197,11 @@ header.scrolled .nav { height: 82px; }
   align-items: center;
   border-radius: 50%;
   display: inline-flex;
-  height: 92px;
+  height: 68px;
   justify-content: center;
   line-height: 1;
   overflow: hidden;
-  width: 92px;
+  width: 68px;
 }
 
 .logo-mark img {
@@ -2032,7 +2032,7 @@ html[data-active-lang="en"] .lang-btn[data-lang="vi"] {
   .nav { height: 86px; }
   header.scrolled .nav { height: 76px; }
   .logo-wordmark { height: 34px; }
-  .logo-mark { height: 72px; width: 72px; }
+  .logo-mark { height: 54px; width: 54px; }
   .tour-detail-header .nav { height: 76px; }
   .tour-detail-header .logo-mark { height: 60px; width: 60px; }
   .logo-mark-official { height: 44px; width: 44px; }
