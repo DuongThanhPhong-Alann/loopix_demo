@@ -18,6 +18,9 @@ export default function ClientScripts() {
     }
     applyManualTranslations();
     syncLanguageButtonClasses();
+    initHeroSwiper();
+    initHeroTourSwitcher();
+    initHeroTourChromeCleanup();
 
     import('aos').then(({ default: AOS }) => {
       if (!mounted) return;
@@ -30,9 +33,6 @@ export default function ClientScripts() {
       });
 
       initLegacyInteractions(AOS);
-      initHeroSwiper();
-      initHeroTourSwitcher();
-      initHeroTourChromeCleanup();
       initMultiSelects();
       initQuoteForm();
     });
@@ -119,27 +119,16 @@ function initHeroSwiper() {
 }
 
 function initHeroTourSwitcher() {
-  const frame = document.querySelector('.hero-tour-iframe');
+  const frames = [...document.querySelectorAll('.hero-tour-iframe, .tour-iframe')];
   const buttons = [...document.querySelectorAll('.hero-tour-switch button[data-tour-src]')];
-  if (!frame) return;
+  if (frames.length === 0) return;
 
-  const loadTour = (tourSrc, tourTitle) => {
+  const loadTour = (frame, tourSrc, tourTitle) => {
     if (!tourSrc || frame.getAttribute('src') === tourSrc) return;
     frame.setAttribute('src', tourSrc);
     frame.setAttribute('title', tourTitle || 'Virtual 360 tour');
+    frame.closest('.project-tour-frame')?.classList.add('is-loading', 'is-loaded');
   };
-
-  const initialButton = buttons.find((button) => button.classList.contains('active')) || buttons[0];
-  const initialSrc = frame.dataset.tourSrc || initialButton?.dataset.tourSrc;
-
-  if (initialSrc) {
-    const scheduleLoad = () => loadTour(initialSrc, initialButton?.dataset.tourTitle || frame.getAttribute('title'));
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(scheduleLoad, { timeout: 1200 });
-    } else {
-      window.setTimeout(scheduleLoad, 700);
-    }
-  }
 
   if (buttons.length === 0) return;
 
@@ -148,7 +137,7 @@ function initHeroTourSwitcher() {
       const tourSrc = button.dataset.tourSrc;
       if (!tourSrc) return;
 
-      loadTour(tourSrc, button.dataset.tourTitle);
+      loadTour(frames[0], tourSrc, button.dataset.tourTitle);
       buttons.forEach((item) => {
         const isActive = item === button;
         item.classList.toggle('active', isActive);
@@ -159,26 +148,58 @@ function initHeroTourSwitcher() {
 }
 
 function initHeroTourChromeCleanup() {
-  const frame = document.querySelector('.hero-tour-iframe');
-  if (!frame) return;
+  const frames = [...document.querySelectorAll('.hero-tour-iframe, .tour-iframe')];
+  if (frames.length === 0) return;
 
   const cleanupCss = `
     [class*="ModalConfirmWrapper"],
     [class*="ModalConfirmWrapper"].show,
     #themeControlbar,
     .copyright,
+    .controlbar-top,
+    .controlbar-bottom,
     .dropdownGroup,
     .dropdownList,
     .dropdownLabel,
-    .controlbar-top,
     [class*="ControlbarWrapper"],
-    [class*="MapPanelWrapper"],
-    [class*="ActionMapWrapper"],
+    [class*="Controlbar"],
+    [class*="Toolbar"],
+    [class*="Topbar"],
+    .popoverControlbar,
     body > div:last-child[style*="z-index: -99"] {
       display: none !important;
       opacity: 0 !important;
       pointer-events: none !important;
       visibility: hidden !important;
+    }
+
+    :root,
+    body {
+      --color-theme: #0b2d5c !important;
+      --color-primary: #0b2d5c !important;
+      --ant-primary-color: #0b2d5c !important;
+    }
+
+    [class*="MapPanelWrapper"],
+    [class*="ActionMapWrapper"] {
+      background: #0b2d5c !important;
+      border-color: rgba(255,255,255,0.18) !important;
+      color: #ffffff !important;
+    }
+
+    [class*="MapPanelWrapper"] *,
+    [class*="ActionMapWrapper"] * {
+      color: #ffffff !important;
+      fill: #ffffff !important;
+      stroke: #ffffff !important;
+    }
+
+    .ant-btn-primary,
+    .ant-switch-checked,
+    .ant-slider-track,
+    .ant-slider-handle {
+      background: #0b2d5c !important;
+      border-color: #0b2d5c !important;
     }
 
     #__next,
@@ -189,7 +210,7 @@ function initHeroTourChromeCleanup() {
     }
   `;
 
-  const applyCleanup = () => {
+  const applyCleanup = (frame) => {
     const doc = frame.contentDocument;
     if (!doc?.head) return;
 
@@ -202,13 +223,16 @@ function initHeroTourChromeCleanup() {
     style.textContent = cleanupCss;
   };
 
-  frame.addEventListener('load', () => {
-    applyCleanup();
-    window.setTimeout(applyCleanup, 600);
-    window.setTimeout(applyCleanup, 1800);
-  });
+  frames.forEach((frame) => {
+    frame.addEventListener('load', () => {
+      frame.closest('.project-tour-frame')?.classList.add('is-loaded');
+      applyCleanup(frame);
+      window.setTimeout(() => applyCleanup(frame), 600);
+      window.setTimeout(() => applyCleanup(frame), 1800);
+    });
 
-  applyCleanup();
+    applyCleanup(frame);
+  });
 }
 
 function initLanguageSwitches() {
@@ -312,7 +336,7 @@ function initLegacyInteractions(AOS) {
     });
   });
 
-  renderProjects(AOS);
+  AOS.refresh();
 }
 
 function renderProjects(AOS) {

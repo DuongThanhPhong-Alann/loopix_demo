@@ -15,9 +15,56 @@ function getProjects() {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-function getProjectsGalleryHtml() {
-  return getProjects()
-    .map((project) => `
+function getProjectTour(project) {
+  const tours = {
+    homestay: {
+      label: 'Homestay',
+      title: 'The Mango Trail',
+      src: '/TheMangoTrial/out/index.html',
+      poster: '/loopix%20homestay.png',
+    },
+    hotel: {
+      label: 'Hotel',
+      title: 'The Odys Boutique',
+      src: '/TheOdysBoutiqueHotel/out/index.html',
+      poster: '/loopix%20hotel.png',
+    },
+  };
+
+  return tours[project.slug] || null;
+}
+
+function getProjectCardHtml(project) {
+  const tour = getProjectTour(project);
+
+  if (tour) {
+    return `
+            <article class="g-item project-card project-tour-grid-card" data-aos="fade-up" data-aos-delay="${escapeHtml(project.delay)}">
+              <div class="project-tour-frame project-tour-card-frame" aria-label="${escapeHtml(tour.title)} virtual tour">
+                <iframe
+                  class="tour-iframe project-tour-iframe"
+                  title="${escapeHtml(tour.title)} virtual tour"
+                  src="${escapeHtml(tour.src)}"
+                  data-tour-src="${escapeHtml(tour.src)}"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; fullscreen; gyroscope; xr-spatial-tracking"
+                  allowfullscreen
+                ></iframe>
+                <div class="project-tour-fallback" style="--tour-poster: url('${escapeHtml(tour.poster)}');" aria-hidden="true">
+                  <span class="project-tag">${escapeHtml(tour.label)}</span>
+                  <strong>${escapeHtml(tour.title)}</strong>
+                </div>
+                <div class="g-overlay project-overlay project-tour-overlay">
+                  <span class="project-tag">${escapeHtml(tour.label)}</span>
+                  <strong>${escapeHtml(tour.title)}</strong>
+                  <p class="project-desc" data-vi="${escapeHtml(project.descriptionVi)}" data-en="${escapeHtml(project.descriptionEn)}">${escapeHtml(project.descriptionVi)}</p>
+                </div>
+              </div>
+            </article>
+          `;
+  }
+
+  return `
             <a class="g-item project-card" href="/projects/${escapeHtml(project.slug)}" data-aos="fade-up" data-aos-delay="${escapeHtml(project.delay)}">
               <img src="${escapeHtml(project.image)}" onerror="this.src='${escapeHtml(project.fallback)}'" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async" />
               <div class="g-overlay project-overlay">
@@ -27,29 +74,11 @@ function getProjectsGalleryHtml() {
                 <em>Tìm hiểu thêm</em>
               </div>
             </a>
-          `)
-    .join('');
+          `;
 }
 
-function getHeroTourHtml() {
-  return `
-        <div class="hero-tour-frame" aria-label="Virtual 360 project preview">
-          <iframe
-            class="hero-tour-iframe"
-            title="The Mango Trial virtual tour"
-            data-tour-src="/TheMangoTrial/out/index.html"
-            loading="lazy"
-            allow="accelerometer; autoplay; fullscreen; gyroscope; xr-spatial-tracking"
-            allowfullscreen
-          ></iframe>
-          <div class="hero-tour-fallback" aria-hidden="true">
-            <span>Virtual 360 Tour</span>
-          </div>
-          <div class="hero-tour-switch" role="tablist" aria-label="Choose virtual tour">
-            <button class="active" type="button" role="tab" aria-selected="true" data-tour-src="/TheMangoTrial/out/index.html" data-tour-title="The Mango Trial virtual tour">Mango</button>
-            <button type="button" role="tab" aria-selected="false" data-tour-src="/TheOdysBoutiqueHotel/out/index.html" data-tour-title="The Odys Boutique Hotel virtual tour">Odys</button>
-          </div>
-        </div>`;
+function getProjectsGalleryHtml() {
+  return getProjects().map(getProjectCardHtml).join('');
 }
 
 function getLegacyBodyHtml() {
@@ -62,7 +91,6 @@ function getLegacyBodyHtml() {
     .replace(/\r\n?/g, '\n')
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/src\/(?:assets\/styles|frontend\/styles)\/global\.css["']\s*\/?>/gi, '')
-    .replace(/<div class="swiper hero-swiper"[\s\S]*?<div class="hero-overlay"><\/div>/, `${getHeroTourHtml()}\n        <div class="hero-overlay"></div>`)
     .replace(
       /(<div class="gallery-grid project-grid" id="projects-gallery">)[\s\S]*?(<\/div>\s*<\/div>\s*<\/section>)/,
       `$1${getProjectsGalleryHtml()}$2`,
