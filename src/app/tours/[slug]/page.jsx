@@ -1,27 +1,15 @@
 import { notFound } from 'next/navigation';
+import { getTourBySlug, getTourStaticParams } from '../../../data/tours';
+import TourFrameClient from '../../../features/tours/TourFrameClient';
 import ClientScripts from '../../../frontend/components/ClientScripts';
-import TourFrameClient from './TourFrameClient';
-
-const tours = {
-  'the-mango-trail': {
-    label: 'Homestay',
-    title: 'The Mango Trail',
-    src: '/TheMangoTrial/out/index.html',
-  },
-  'the-odys-boutique': {
-    label: 'Hotel',
-    title: 'The Odys Boutique',
-    src: '/TheOdysBoutiqueHotel/out/index.html',
-  },
-};
 
 export function generateStaticParams() {
-  return Object.keys(tours).map((slug) => ({ slug }));
+  return getTourStaticParams();
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const tour = tours[slug];
+  const tour = getTourBySlug(slug);
 
   return {
     title: tour ? `${tour.title} - Loopix Virtual 360 Tour` : 'Loopix Virtual 360 Tour',
@@ -30,7 +18,7 @@ export async function generateMetadata({ params }) {
 
 export default async function TourDetail({ params }) {
   const { slug } = await params;
-  const tour = tours[slug];
+  const tour = getTourBySlug(slug);
   if (!tour) notFound();
 
   return (

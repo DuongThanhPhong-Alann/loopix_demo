@@ -1,19 +1,13 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import { getProjectBySlug, getProjectStaticParams } from '../../../data/projects';
 import ClientScripts from '../../../frontend/components/ClientScripts';
 
-function getProjects() {
-  const filePath = path.join(process.cwd(), 'public/api/projects.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
-
 export function generateStaticParams() {
-  return getProjects().map((project) => ({ slug: project.slug }));
+  return getProjectStaticParams();
 }
 
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;
-  const project = getProjects().find((item) => item.slug === slug) || {
+  const project = getProjectBySlug(slug) || {
     title: 'Dự án',
     tag: 'Virtual Tour 360',
     image: '/Virtual360%20Tour.jpg',
