@@ -9,6 +9,10 @@ import './globals.css';
 export const metadata = {
   title: 'Loopix Virtual 360 Tour - Vietnam',
   description: 'Sense & Scene Studio virtual tour 360 services',
+  icons: {
+    icon: '/loopix-orb.png',
+    apple: '/loopix-orb.png',
+  },
 };
 
 export default function RootLayout({ children }) {
