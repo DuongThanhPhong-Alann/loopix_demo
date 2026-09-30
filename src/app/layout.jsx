@@ -6,9 +6,26 @@ import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://loopix.vn';
+const logoUrl = new URL('/loopix-orb.png', siteUrl).toString();
+
 export const metadata = {
   title: 'Loopix Virtual 360 Tour - Vietnam',
   description: 'Sense & Scene Studio virtual tour 360 services',
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: 'Loopix Virtual 360 Tour - Vietnam',
+    description: 'Sense & Scene Studio virtual tour 360 services',
+    siteName: 'Loopix',
+    type: 'website',
+    images: [{ url: logoUrl, alt: 'Loopix' }],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Loopix Virtual 360 Tour - Vietnam',
+    description: 'Sense & Scene Studio virtual tour 360 services',
+    images: [logoUrl],
+  },
   icons: {
     icon: '/loopix-orb.png',
     apple: '/loopix-orb.png',
@@ -170,6 +187,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="vi" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Loopix',
+              url: siteUrl,
+              logo: logoUrl,
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
